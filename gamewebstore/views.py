@@ -3,7 +3,7 @@ from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.models import User
 from .models import Juego
-from .forms import JuegoForm
+from .forms import JuegoForm, UpdateJuegoForm
 
 # Create your views here.
 def cerrar_sesion(request):
@@ -30,6 +30,24 @@ def administrador(request):
 
 def carrito(request):
     return render(request,'gamewebstore/carrito.html')
+
+def modificarjuego(request, id):
+    juego = get_object_or_404(Juego, id=id)
+    form = UpdateJuegoForm(instance=juego)
+    
+    if request.method=="POST":
+        form=UpdateJuegoForm(data=request.POST,files=request.FILES,instance=juego)
+        if form.is_valid():
+            form.save()
+            return redirect(to="adminGames")
+    
+    
+    datos={
+        "form":form,
+        "juego":juego
+    }
+
+    return render(request, 'gamewebstore/modificarjuego.html', datos)
 
 def deleteGame(request):
     return render(request,'gamewebstore/deleteGame.html')

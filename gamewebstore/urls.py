@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import index, adminGames, administrador, carrito, deleteGame, deleteUser, descriptionGame, editarPerfil, forgetPassword, gatoRandom, msgVerificarEmail, register, suspendUser, userProfile, vistaCompras, vistaVender, vistaVentas, cerrar_sesion
+from .views import index, adminGames, administrador, carrito, modificarjuego, deleteGame, deleteUser, descriptionGame, editarPerfil, forgetPassword, gatoRandom, msgVerificarEmail, register, suspendUser, userProfile, vistaCompras, vistaVender, vistaVentas, cerrar_sesion
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -8,6 +8,7 @@ urlpatterns = [
     path('adminGames/', adminGames, name='adminGames'),
     path('administrador/', administrador, name='administrador'),
     path('carrito/', carrito, name='carrito'),
+    path('modificarjuego/<id>', modificarjuego, name='modificarjuego'),
     path('deleteGame/', deleteGame, name='deleteGame'),
     path('deleteUser/', deleteUser, name='deleteUser'),
     path('descriptionGame/<id>', descriptionGame, name='descriptionGame'),
