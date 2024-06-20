@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.models import User
 from .models import Juego
 from .forms import JuegoForm, UpdateJuegoForm
+from django.contrib import messages
 
 # Create your views here.
 def cerrar_sesion(request):
@@ -39,6 +40,7 @@ def modificarjuego(request, id):
         form=UpdateJuegoForm(data=request.POST,files=request.FILES,instance=juego)
         if form.is_valid():
             form.save()
+            messages.warning(request,"Juego modificado")
             return redirect(to="adminGames")
     
     

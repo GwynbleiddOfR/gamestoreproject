@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jersey+10+Charted&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {% block importscss %}
 
     {% endblock importscss %}
@@ -70,6 +71,32 @@
             </div>
         </div>
     </nav>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.level == 25 %}
+                <script>
+                    Swal.fire({
+                        title: '¡OPERACIÓN EXITOSA!',
+                        text: '{{message}}',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    })
+                </script>
+            {% endif %}
+
+            {% if message.level == 30 %}
+                <script>
+                    Swal.fire({
+                        title: '¡OPERACIÓN REALIZADA!',
+                        text: '{{message}}',
+                        icon: 'warning',
+                        confirmButtonText: 'Aceptar'
+                    })
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+            
     {% block contenido %} 
     
     {% endblock contenido %}
