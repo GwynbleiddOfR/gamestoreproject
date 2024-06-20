@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from .models import Juego
 from .forms import JuegoForm, UpdateJuegoForm
 from django.contrib import messages
+from os import remove, path
+from django.conf import settings
 
 # Create your views here.
 def cerrar_sesion(request):
@@ -43,7 +45,6 @@ def modificarjuego(request, id):
             messages.warning(request,"Juego modificado")
             return redirect(to="adminGames")
     
-    
     datos={
         "form":form,
         "juego":juego
@@ -51,8 +52,20 @@ def modificarjuego(request, id):
 
     return render(request, 'gamewebstore/modificarjuego.html', datos)
 
-def deleteGame(request):
-    return render(request,'gamewebstore/deleteGame.html')
+def deleteGame(request, id):
+    juego=get_object_or_404(Juego, id=id)
+    
+    if request.method=="POST":
+        remove(path.join(str(settings.MEDIA_ROOT).replace('/media',''))+juego.foto_juego.url)
+        juego.delete()
+        messages.warning(request,"Juego eliminado")
+        return redirect(to="adminGames")
+        
+    datos={
+        "juego":juego
+    }
+
+    return render(request,'gamewebstore/deleteGame.html', datos)
 
 def deleteUser(request):
     return render(request,'gamewebstore/deleteUser.html')
