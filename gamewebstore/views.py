@@ -11,7 +11,11 @@ def cerrar_sesion(request):
     return redirect(to='index')
 
 def index(request):
-    return render(request,'gamewebstore/index.html')
+    juegos=Juego.objects.all()
+    datos={
+        "juegos":juegos
+    }
+    return render(request,'gamewebstore/index.html', datos)
 
 def adminGames(request):
     juegos=Juego.objects.all()
