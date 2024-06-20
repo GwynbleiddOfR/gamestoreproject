@@ -1,5 +1,6 @@
 {% extends "gamewebstore/base.html" %}
 {%load static%}
+{% load crispy_forms_tags %}
 {% block contenido %}
 
     <!-- Editar perfil -->
@@ -11,95 +12,12 @@
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Formulario de venta</h3>
 
-                            <form action="{% url 'vistaVentas' %}" class="was-validated" id="formularioVenta" method="post">
-                                <div class="row">
-                                    <div class="col-md-12 mb-4">
-                                        <div data-mdb-input-init class="form-outline">
-                                            <label class="form-label" for="nameGame">Nombre del juego</label>
-                                            <input type="text" id="nameGame" name="nameGame"
-                                                placeholder="Nombre del juego..." class="form-control form-control-lg"
-                                                required minlength="2" />
-                                            <div class="invalid-feedback">Al menos 2 caracteres</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 mb-4">
-                                        <div data-mdb-input-init class="form-outline">
-                                            <label class="form-label" for="gameType">Género</label>
-                                            <input type="text" id="gameType" name="gameType" placeholder="Género..."
-                                                class="form-control form-control-lg" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]+"
-                                                required minlength="2" />
-                                            <div class="invalid-feedback">Al menos 2 caracteres, no se permiten números
-                                                ni caracteres especiales</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 mb-4 d-flex align-items-center">
-                                        <div data-mdb-input-init class="form-outline">
-                                            <label class="form-label" for="consola">Consola</label>
-                                            <select id="consola" name="consola" class="form-control form-control-lg"
-                                                required />
-                                            <option value="">Selecciona una consola...</option>
-                                            <option value="ps1">Playstation 1</option>
-                                            <option value="ps2">Playstation 2</option>
-                                            <option value="ps3">Playstation 3</option>
-                                            <option value="ps4">Playstation 4</option>
-                                            <option value="ps5">Playstation 5</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 mb-4 d-flex align-items-center">
-                                        <div data-mdb-input-init class="form-outline">
-                                            <label class="form-label" for="precio">Precio</label>
-                                            <input type="number" id="precio" name="precio" placeholder="$"
-                                                class="form-control form-control-lg" oninput="validarLongitudInput('precio', 6)"
-                                                required min="0" max="999999" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 mb-4 d-flex align-items-center">
-                                        <div data-mdb-input-init class="form-outline">
-                                            <label class="form-label" for="copias">Número de copias</label>
-                                            <input type="number" id="copias" name="copias" placeholder="N° de copias..."
-                                                class="form-control form-control-lg" oninput="validarLongitudInput('copias', 2)"
-                                                required min="1" maxlength="3" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 mb-4">
-                                        <div data-mdb-input-init class="form-outline">
-                                            <label class="form-label" for="descripcion">Descripción</label>
-                                            <textarea class="form-control" id="descripcion" name="descripcion" rows="10"
-                                                required></textarea>
-                                            <div class="invalid-feedback">Agregue una descripción de su juego</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 mb-4">
-                                        <label class="form-label" for="archivo">Subir imagen</label> <br>
-                                        <input class="form-control" id="archivo" name="archivo" type="file" required>
-                                        <div class="invalid-feedback">Agregue una imagen de su juego</div>
-                                    </div>
-                                </div>
-
-                                <div class="d-grid">
-                                    <button type="submit" id="botonVenta" class="btn btn-dark btn-lg mb-3">Realizar venta</button>
-                                </div>
-
-                            
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{form|crispy}}
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-dark btn-lg">Realizar venta</button>
+                                </div> 
                             </form>
                         </div>
                     </div>
