@@ -1,6 +1,13 @@
 from django.shortcuts import render
+from django.contrib.auth import logout
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.models import User
 
 # Create your views here.
+def cerrar_sesion(request):
+    logout(request)
+    return redirect(to='index')
+
 def index(request):
     return render(request,'gamewebstore/index.html')
 
@@ -30,9 +37,6 @@ def forgetPassword(request):
 
 def gatoRandom(request):
     return render(request,'gamewebstore/gatoRandom.html')
-
-def login(request):
-    return render(request,'gamewebstore/login.html')
 
 def msgVerificarEmail(request):
     return render(request,'gamewebstore/msgVerificarEmail.html')
