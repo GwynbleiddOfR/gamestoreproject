@@ -37,8 +37,14 @@ def deleteGame(request):
 def deleteUser(request):
     return render(request,'gamewebstore/deleteUser.html')
 
-def descriptionGame(request):
-    return render(request,'gamewebstore/descriptionGame.html')
+def descriptionGame(request, id):
+    juego=get_object_or_404(Juego, id=id)
+    
+    datos={
+        "juego":juego
+    }
+
+    return render(request,'gamewebstore/descriptionGame.html', datos)
 
 def editarPerfil(request):
     return render(request,'gamewebstore/editarPerfil.html')

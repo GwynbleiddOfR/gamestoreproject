@@ -25,7 +25,7 @@
                         <div class="col-md-6 col-lg-4 col-xl-3 p-2">
                             <div class="collection-img position-relative">
                                 
-                                <a href="{% url 'descriptionGame'%}"><img src="{{j.foto_juego.url}}" class="w-100"></a>
+                                <a href="{% url 'descriptionGame' j.id %}"><img src="{{j.foto_juego.url}}" class="w-100"></a>
                             </div>
                             <div class="text-center">
                                 <p class="text-capitalize my-1">{{j.nomb_juego}}</p>

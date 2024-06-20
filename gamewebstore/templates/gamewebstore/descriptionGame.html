@@ -15,32 +15,28 @@
                 <main class="col-lg-6">
                     <div class="ps-lg-3">
                         <h4 class="title text-dark">
-                            The Witcher 3 Wild Hunt
+                            {{juego.nomb_juego}}
                         </h4>
                         <div class="d-flex flex-row my-3">
-                            <span class="text-muted"><i class="bi bi-basket-fill mx-1"></i>4 productos</span>
+                            <span class="text-muted"><i class="bi bi-basket-fill mx-1"></i>{{juego.stock}} productos</span>
                             <span class="text-success ms-2 mx-3">En stock</span>
-                            <a href="{% url 'userProfile' %}">
-                                <span class="fw-bold">@Axel123</span>
-                            </a>
                         </div>
 
                         <div class="mb-3">
-                            <span class="h5">$39.990</span>
+                            <span class="h5">${{juego.precio}}</span>
                             <span class="text-muted">/cada uno</span>
                         </div>
 
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt facere expedita harum ad
-                            quasi dolores repellendus, amet.
+                            {{juego.descripcion}}
                         </p>
 
                         <div class="row">
                             <dt class="col-3">Género:</dt>
-                            <dd class="col-9">Acción, aventura, RPG</dd>
+                            <dd class="col-9">{{juego.genero}}</dd>
 
                             <dt class="col-3">Consola:</dt>
-                            <dd class="col-9">PS5</dd>
+                            <dd class="col-9">{{juego.consola}}</dd>
                         </div>
 
                         <hr />
