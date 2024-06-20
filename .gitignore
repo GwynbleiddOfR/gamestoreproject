@@ -1,0 +1,4 @@
+gamewebstore/__pycache__/
+sitio/__pycache__/
+gamewebstore/migrations/__pycache__
+db.sqlite3

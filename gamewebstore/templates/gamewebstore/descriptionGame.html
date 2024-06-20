@@ -1,0 +1,72 @@
+{% extends "gamewebstore/base.html" %}
+{%load static%}
+{% block contenido %}
+
+    <section class="py-5" style="background-color: #eee;">
+        <div class="container">
+            <div class="row gx-5">
+                <aside class="col-lg-6">
+                    <div class="border rounded-4 mb-3 d-flex justify-content-center">
+                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit"
+                            src="{% static 'gamewebstore/img/witcher3.png' %}" />
+                    </div>
+
+                </aside>
+                <main class="col-lg-6">
+                    <div class="ps-lg-3">
+                        <h4 class="title text-dark">
+                            The Witcher 3 Wild Hunt
+                        </h4>
+                        <div class="d-flex flex-row my-3">
+                            <span class="text-muted"><i class="bi bi-basket-fill mx-1"></i>4 productos</span>
+                            <span class="text-success ms-2 mx-3">En stock</span>
+                            <a href="{% url 'userProfile' %}">
+                                <span class="fw-bold">@Axel123</span>
+                            </a>
+                        </div>
+
+                        <div class="mb-3">
+                            <span class="h5">$39.990</span>
+                            <span class="text-muted">/cada uno</span>
+                        </div>
+
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt facere expedita harum ad
+                            quasi dolores repellendus, amet.
+                        </p>
+
+                        <div class="row">
+                            <dt class="col-3">Género:</dt>
+                            <dd class="col-9">Acción, aventura, RPG</dd>
+
+                            <dt class="col-3">Consola:</dt>
+                            <dd class="col-9">PS5</dd>
+                        </div>
+
+                        <hr />
+
+                        <div class="row mb-4">
+                            <div class="col-md-4 col-6 mb-3">
+                                <input type="number" placeholder="1" value="1" min="1" class="input-cantidad"
+                                    id="cantidadJuego" oninput="validarLongitudInput('cantidadJuego', 2)">
+
+                                <div class="btn-up-down">
+                                    <i class="fa-solid fa-chevron-up" id="up"></i>
+                                    <i class="fa-solid fa-chevron-down" id="down"></i>
+
+                                </div>
+                            </div>
+                             
+
+                            <div class="col-md-8 col-6">
+                                <a href="{% url 'carrito' %}" class="btn btn-dark shadow-0"> <i class="bi bi-cart-fill"></i>
+                                    Agregar
+                                    al carrito </a>
+                            </div>
+                        </div>
+                </main>
+            </div>
+        </div>
+    </section>
+    <script src='{% static "gamewebstore/js/scripts.js" %}'></script>
+{% endblock contenido %}

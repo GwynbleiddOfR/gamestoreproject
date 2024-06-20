@@ -1,0 +1,27 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href='{% static "gamewebstore/css/gatoRandom.css" %}' />
+    <title>Gatos randoms</title>
+
+</head>
+
+<body>
+    <a href="{% url 'index' %}">
+        <button class="btn-volver">Volver a comprar &#128077;</button>
+    </a>
+    <section class="header-content">
+        <button class="btn" style="margin: 50px;">GATO RANDOM! &#128520;</button>
+    </section>
+
+    <div class="container"></div>
+
+    <script src='{% static "gamewebstore/js/apis.js" %}'></script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href='{% static "gamewebstore/css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" href='{% static "gamewebstore/css/stylesapi.css" %}'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10+Charted&display=swap" rel="stylesheet">
+    {% block importscss %}
+
+    {% endblock importscss %}
+
+    <title>Inicio</title>
+</head>
+
+<body style="background-color: #eee;"">
+   <!-- Encabezado (navbar) -->    
+    <nav class="navbar navbar-expand-md bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+                <img src="{% static 'gamewebstore/img/whitewolf.png' %}" alt="White Wolf Logo" style="margin-right: 10px;"> 
+                <h4 class="text-white" style="margin: 0">White Wolf</h4>
+            </a>
+            <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="{% url 'index' %}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'userProfile' %}">Mi perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'administrador' %}">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'login' %}">Iniciar sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'register' %}">Registrarse</a>
+                    </li>
+                </ul>
+                <div class="search-and-icons">
+                    <form class="d-flex mb-2 me-4" role="search">
+                        <input class="form-control me-2" type="search" aria-label="Search">
+                    </form>
+
+                    <div class="user-icons d-flex mb-2">
+                        <a href="{% url 'carrito' %}">
+                            <div class="cart"><i class="bi bi-cart-fill" style = "color:white;"></i></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% block contenido %} 
+    
+    {% endblock contenido %}
+
+    <script src='{% static "gamewebstore/js/bootstrap.bundle.min.js" %}'></script>
+</body>
+
+</html>

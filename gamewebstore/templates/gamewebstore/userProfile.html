@@ -1,0 +1,54 @@
+{% extends "gamewebstore/base.html" %}
+{%load static%}
+{% block contenido %}
+
+    <!-- Perfil -->
+    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+        <div class="card p-5">
+            <p class="fw-bold">Información de contacto</p>
+            <hr class="mb-1">
+            <div class="image d-flex flex-column justify-content-center align-items-center"> 
+                <button class="btn btn-secondary"> <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" /></button>
+                <h3 class="name mt-3">Axel Silva</h3> 
+                <span class="idd fw-bold">@axel123</span>
+                <span class="id fw-bold">ID: 1</span>
+                <div class="d-flex flex-row justify-content-center align-items-center gap-2 mt-2"> 
+                    <span class="email" id="mail">pagalosbarrosluco@gmail.com</span>
+                    <span
+                        id="iconoCopiar" title="Copiar" onclick="copiarEmail()"><i class="bi bi-copy"></i>
+                    </span> 
+                </div>
+
+                <div id="alerta-email-copy" class="alerta-email-copy" style="display: none; position: absolute;">
+                    ¡Correo copiado!
+                </div>
+
+                <div class="d-flex flex-row justify-content-center align-items-center gap-2 mt-2"> 
+                    <span class="telefono" id="telefono">+56912345678</span>
+                    <span
+                        id="iconoCopiar2" title="Copiar" onclick="copiarTelefono()"><i class="bi bi-copy"></i>
+                    </span> 
+
+                <div id="alerta-tel-copy" class="alerta-tel-copy" style="display: none; position: absolute;">
+                    ¡Teléfono copiado!
+                </div>
+
+                </div>
+                <div class="d-flex justify-content-between mt-2"> 
+                <a href="{% url 'editarPerfil' %}">
+                    <button type="button" class="btn btn-dark">Editar información</button> 
+                </a>
+                <a href="{% url 'vistaVender' %}"><button type="button" class="btn btn-dark">Realizar venta</button> </a>
+                <a href="{% url 'vistaVentas' %}"><button type="button" class="btn btn-dark">Mis ventas</button> </a>
+                <a href="{% url 'vistaCompras' %}">
+                    <button type="button" class="btn btn-dark">Mis compras</button>
+                </a>
+                    
+                </div>
+                <div class="px-2 rounded mt-4 date"> <span class="join">Se unió el 1 de abril del 2030</span> </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src='{% static "gamewebstore/js/apis.js" %}'></script>
+{% endblock contenido %}

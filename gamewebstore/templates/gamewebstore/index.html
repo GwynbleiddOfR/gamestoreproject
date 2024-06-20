@@ -1,0 +1,124 @@
+{% extends "gamewebstore/base.html" %}
+{% load static %}
+{% block contenido %}
+
+
+    <!-- Main -->
+    <section id="collection" class="p-5">
+        <div class="container">
+            <div class="title text-center">
+                <h2 class="position-relative d-inline-block" id="palabrita">TODOS LOS JUEGOS DE PLAYSTATION</h2>
+            </div>
+
+            <div class="row">
+                <div class="d-flex flex-wrap justify-content-center mt-5 filter-button-group">
+                    <button type="button" class="btn m-2 text-dark active-filter-btn">Todos</button>
+                    <button type="button" class="btn m-2 text-dark">PS1</button>
+                    <button type="button" class="btn m-2 text-dark">PS2</button>
+                    <button type="button" class="btn m-2 text-dark">PS3</button>
+                    <button type="button" class="btn m-2 text-dark">PS4</button>
+                    <button type="button" class="btn m-2 text-dark">PS5</button>
+                </sdiv>
+
+                <div class="collection-list mt-4 row">
+                    <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                        <div class="collection-img position-relative">
+                            <a href="{% url 'descriptionGame' %}"><img src="{% static 'gamewebstore/img/witcher3.png' %}" class="w-100"></a>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-capitalize my-1">The Witcher 3: Wild Hunt</p>
+                            <span class="fw-bold d-block">$39.990</span>
+                            <a href="{% url 'login' %}">
+                                <button type="button" class="btn m-2 text-dark">Agregar al carrito</button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                        <div class="collection-img position-relative">
+                            <img src="{% static 'gamewebstore/img/wakingdeads2.jpg' %}" class="w-100">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-capitalize my-1">The Walking Dead: Season 2</p>
+                            <span class="fw-bold d-block">$19.990</span>
+                            <button type="button" class="btn m-2 text-dark">Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                        <div class="collection-img position-relative">
+                            <img src="{% static 'gamewebstore/img/7daystodie.png' %}" class="w-100">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-capitalize my-1">7 Days to Die</p>
+                            <span class="fw-bold d-block">$39.990</span>
+                            <button type="button" class="btn m-2 text-dark">Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                        <div class="collection-img position-relative">
+                            <img src="{% static 'gamewebstore/img/peppapig.png' %}" class="w-100">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-capitalize my-1">My Friend Peppa Pig</p>
+                            <span class="fw-bold d-block">$500</span>
+                            <button type="button" class="btn m-2 text-dark">Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                        <div class="collection-img position-relative">
+                            <img src="{% static 'gamewebstore/img/thelastofus.png' %}" class="w-100">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-capitalize my-1">The Last Of Us Part I</p>
+                            <span class="fw-bold d-block">$14.990</span>
+                            <button type="button" class="btn m-2 text-dark">Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                        <div class="collection-img position-relative">
+                            <img src="{% static 'gamewebstore/img/guitarherolive.png' %}" class="w-100">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-capitalize my-1">Guitar Hero Live</p>
+                            <span class="fw-bold d-block">$29.990</span>
+                            <button type="button" class="btn m-2 text-dark">Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                        <div class="collection-img position-relative">
+                            <img src="{% static 'gamewebstore/img/wachoperro.png' %}" class="w-100">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-capitalize my-1">Wacho Perro</p>
+                            <span class="fw-bold d-block">$1.000</span>
+                            <button type="button" class="btn m-2 text-dark">Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                        <div class="collection-img position-relative">
+                            <img src="{% static 'gamewebstore/img/wolfamongus.png' %}" class="w-100">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-capitalize my-1">The Wolf Among Us</p>
+                            <span class="fw-bold d-block">$9.900</span>
+                            <button type="button" class="btn m-2 text-dark">Agregar al carrito</button>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="text-center m-4">
+                            <p class="fw-bold">&#129309; &#129309; &#129309; NO HAY MAS JUEGUITOS PERO MIENTRAS MIRA GATITOS &#129309; &#129309; &#129309;</p>
+                            <a href="{% url 'gatoRandom' %}">
+                                <button class="btn btn-sucess">RANDOM CATSSSSSSSSSS!!!!!!!!!!!</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+    </section>
+    {% endblock contenido %}

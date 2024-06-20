@@ -1,0 +1,57 @@
+{% extends "gamewebstore/base.html" %}
+{%load static%}
+{% block contenido %}
+
+    <!-- Formulario suspender usuario -->
+    <section class="vh-100">
+        <div class="container py-5 h-100 animate__animated animate__backInLeft">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Formulario de eliminación de juego</h3>
+
+                            <form action="{% url 'adminGames' %}" class="was-validated" id="formDeleteGame" method="post">
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <div data-mdb-input-init class="form-outline">
+                                            <label class="form-label" for="nameGame">Motivo:</label>
+                                            <input type="text" id="nameGame" name="nameGame"
+                                                placeholder="Escriba el motivo..." class="form-control form-control-lg"
+                                                required minlength="1" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <div data-mdb-input-init class="form-outline">
+                                            <label class="form-label" for="descripcion">Descripción</label>
+                                            <textarea class="form-control" id="descripcion" name="descripcion"
+                                                placeholder="Escriba los detalles de la eliminación..." rows="10"
+                                                required></textarea>
+                                            <div class="invalid-feedback">Agregue más detalles</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <label class="form-label" for="archivo">Subir imagen</label> <br>
+                                        <input class="form-control" type="file" id="archivo" name="archivo" required>
+                                        <div class="invalid-feedback">Agregue una imagen de su juego</div>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-dark btn-lg mb-3">Eliminar juego</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src='{% static "gamewebstore/js/scripts.js" %}'></script>
+{% endblock contenido %}

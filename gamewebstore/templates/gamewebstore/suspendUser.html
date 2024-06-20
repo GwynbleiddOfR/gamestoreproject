@@ -1,0 +1,124 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspension de usuario</title>
+    <link rel="stylesheet" href='{% static "gamewebstore/css/bootstrap.min.css" %}'>
+    <link rel="stylesheet" href='{% static "gamewebstore/css/stylesapi.css" %}'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body style="background-color: #eee;">
+    <!-- Encabezado (navbar) -->
+    <nav class="navbar navbar-expand-md bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+                <img src="{% static 'gamewebstore/img/whitewolf.png' %}" alt="White Wolf Logo" style="margin-right: 10px;"> 
+                <h4 class="text-white" style="margin: 0">White Wolf</h4>
+            </a>
+            <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="{% url 'index' %}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'userProfile' %}">Mi perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'administrador' %}">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'login' %}">Iniciar sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'register' %}">Registrarse</a>
+                    </li>
+                </ul>
+                <div class="search-and-icons">
+                    <form class="d-flex mb-2 me-4" role="search">
+                        <input class="form-control me-2" type="search" aria-label="Search">
+                    </form>
+
+                    <div class="user-icons d-flex mb-2">
+                        <a href="{% url 'carrito' %}">
+                            <div class="cart"><i class="bi bi-cart-fill" style = "color:white;"></i></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Formulario suspender usuario -->
+    <section class="vh-100">
+        <div class="container py-5 h-100 animate__animated animate__backInLeft">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Formulario de suspensión de usuario</h3>
+
+                            <form action="{% url 'administrador' %}" class="was-validated" id="formSuspendUser" method="post">
+                                <div class="row">
+                                    <div class="col-md-12 mb-4 d-flex align-items-center">
+                                        <div data-mdb-input-init class="form-outline">
+                                            <label class="form-label" for="diaSuspendido">Número de días:</label>
+                                            <input type="number" id="diaSuspendido" name="dias" placeholder="N° de días..."
+                                                class="form-control form-control-lg" oninput="validarLongitudInput('diaSuspendido', 3)"
+                                                required min="1" maxlength="3" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <div data-mdb-input-init class="form-outline">
+                                            <label class="form-label" for="nameGame">Motivo:</label>
+                                            <input type="text" id="nameGame" name="nameGame"
+                                                placeholder="Escriba el motivo..." class="form-control form-control-lg"
+                                                required minlength="1" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <div data-mdb-input-init class="form-outline">
+                                            <label class="form-label" for="descripcion">Descripción</label>
+                                            <textarea class="form-control" id="descripcion" name="descripcion"
+                                                placeholder="Escriba los detalles de la suspensión..." rows="10"
+                                                required></textarea>
+                                            <div class="invalid-feedback">Agregue más detalles</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <label class="form-label" for="archivo">Subir imagen</label> <br>
+                                        <input class="form-control" type="file" id="archivo" name="archivo" required>
+                                        <div class="invalid-feedback">Agregue una imagen para dar más detalles</div>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-dark btn-lg mb-3">Suspender usuario</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="js/scripts.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+{% extends "gamewebstore/base.html" %}
+{%load static%}
+{% block contenido %}
+
+    <!-- Lista de juegos -->
+    <div class="container mt-3">
+        <p class="mb-0 display-5">Opciones de administrador</p>
+        <a href="{% url 'administrador' %}" class="btn btn-dark my-4 mx-1">Administrar usuarios</a>
+        <a href="{% url 'adminGames' %}" class="btn btn-dark my-1 mx-1">Administrar juegos</a>
+        <form class="mt-3">
+            <div class="form-row align-items-center">
+                <div class="col-auto">
+                    <div class="form-group mb-0">
+                        <input type="text" class="form-control" id="adminBuscarJuegos" placeholder="Ingresa ID">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-dark mt-3">Buscar</button>
+                </div>
+            </div>
+        </form>
+        <div class="table-responsive my-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="bg-dark text-white">ID</th>
+                        <th class="bg-dark text-white">ID Usuario</th>
+                        <th class="bg-dark text-white">Nombre</th>
+                        <th class="bg-dark text-white">Género</th>
+                        <th class="bg-dark text-white">Consola</th>
+                        <th class="bg-dark text-white">Precio</th>
+                        <th class="bg-dark text-white">Descripción</th>
+                        <th class="bg-dark text-white">Imágen</th>
+                        <th class="bg-dark text-white">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>The Witcher 3: Wild Hunt</td>
+                        <td>Acción, aventura, RPG</td>
+                        <td>PS5</td>
+                        <td>$39.990</td>
+                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                        <td><img src="{% static 'gamewebstore/img/witcher3.png' %}" class="img-fluid rounded-3" style="width: 65px;" alt="Witcher3"></td>
+                        <td class="text-center">
+                            <a href="{% url 'deleteGame' %}">
+                                <button type="button" class="btn btn-danger d-inline-block mx-1 my-1"><i
+                                        class="bi bi-trash3"></i>Eliminar</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% endblock contenido %}

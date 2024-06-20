@@ -1,0 +1,187 @@
+/* Navbar */
+.navbar {
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.18);
+}
+
+.navbar .navbar-brand img {
+  max-width: 100px;
+}
+
+@media screen and (min-width: 1200px) {
+  .navbar {
+    letter-spacing: 0.05em;
+  }
+
+  .navbar-collapse .navbar-nav .nav-link {
+    padding: 0.2em 1em;
+  }
+
+  .navbar .navbar-brand img {
+    max-width: 7em;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .navbar .navbar-brand img {
+    max-width: 6em;
+  }
+
+  .navbar-collapse {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+  }
+
+  .search-and-icons,
+  .contact-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .search-and-icons {
+    width: 70%;
+  }
+
+  .navbar form {
+    flex: 1;
+  }
+}
+
+.navbar-collapse .navbar-nav .nav-link {
+  color: #000;
+}
+
+.user-icons div {
+  padding-right: 1em;
+  font-size: 1.2em;
+  color: #000;
+}
+
+.navbar form input {
+  border-radius: 0;
+}
+
+.navbar form input[type="search"] {
+  height: 2em;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='grey' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 95%;
+}
+
+.navbar form input[type="search"]:focus {
+  background: #fff;
+  box-shadow: none;
+}
+
+/* Main */
+#palabrita{
+  font-family: "Jersey 10 Charted", sans-serif;
+}
+
+
+.active-filter-btn:hover {
+  background-color: black !important;
+  color: white !important;
+}
+
+.collection-list button {
+  background-color: white !important;
+  color: black !important;
+  border-color: black;
+  transition: background-color 0.3s;
+}
+
+.collection-list button:hover {
+  background-color: black !important;
+  color: white !important;
+}
+
+/* Carrito */
+@media (min-width: 1025px) {
+  .h-custom {
+    height: 100vh !important;
+  }
+}
+
+#precio::-webkit-inner-spin-button,
+#precio::-webkit-outer-spin-button,
+#numero-tarjeta::-webkit-inner-spin-button,
+#numero-tarjeta::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* adminGames */
+@media (min-width: 992px) {
+  #adminBuscarJuegos {
+      max-width: 300px;
+  }
+}
+
+@media (min-width: 992px) {
+  #adminBuscarUser {
+      max-width: 300px;
+  }
+}
+
+/* Register */
+.was-validated .form-check-input:not(:checked) + .form-check-label {
+  color: black;
+}
+
+.was-validated .form-check-input:checked + .form-check-label {
+  color: green;
+}
+
+.was-validated .form-check-input:not(:checked) {
+  background-color: #fff; 
+  border-color: #ced4da;
+}
+
+#pass:valid, #pass.is-valid,
+#pass:invalid, #pass.is-invalid,
+#rePass:valid, #rePass.is-valid,
+#rePass:invalid, #rePass.is-invalid {
+  background-image: none;
+}
+
+#pass:valid, #pass.is-valid {
+  border-color: #ced4da;
+}
+
+#pass:invalid, #pass.is-invalid {
+  border-color: #ced4da;
+}
+
+#pass:valid:focus, #pass.is-valid:focus, #pass:invalid:focus, #pass.is-invalid:focus {
+  border-color: black;
+  box-shadow: none;
+}
+
+#rePass:valid, #rePass.is-valid {
+  border-color: #ced4da;
+}
+
+#rePass:invalid, #rePass.is-invalid {
+  border-color: #ced4da;
+}
+
+#rePass:valid:focus, #rePass.is-valid:focus, #rePass:invalid:focus, #rePass.is-invalid:focus {
+  border-color: black;
+  box-shadow: none;
+}
+
+/* User profile */
+.alerta-email-copy,
+.alerta-tel-copy {
+  padding: 10px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.card {
+  position: relative;
+}

@@ -1,0 +1,77 @@
+{% extends "gamewebstore/base.html" %}
+{%load static%}
+{% block contenido %}
+
+    <!-- Lista de usuarios -->
+    <div class="container mt-3">
+        <p class="mb-0 display-5">Opciones de administrador</p>
+        <a href="{% url 'administrador' %}" class="btn btn-dark my-4 mx-1">Administrar usuarios</a>
+        <a href="{% url 'adminGames' %}" class="btn btn-dark my-1 mx-1">Administrar juegos</a>
+        <form class="mt-3">
+            <div class="form-row align-items-center">
+                <div class="col-auto">
+                    <div class="form-group mb-0">
+                        <input type="text" class="form-control" id="adminBuscarUser" placeholder="Ingresa ID">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-dark mt-3">Buscar</button>
+                    <a href="{% url 'register' %}" class="btn btn-dark mt-3 mx-5">Crear usuario</a>
+                </div>
+            </div>
+        </form>
+        <div class="table-responsive my-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="bg-dark text-white">ID</th>
+                        <th class="bg-dark text-white">Nombre</th>
+                        <th class="bg-dark text-white">Apellido</th>
+                        <th class="bg-dark text-white">Nombre de usuario</th>
+                        <th class="bg-dark text-white">Sexo</th>
+                        <th class="bg-dark text-white">Correo electrónico</th>
+                        <th class="bg-dark text-white">Número de telefóno</th>
+                        <th class="bg-dark text-white">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Axel</td>
+                        <td>Silva</td>
+                        <td>axel123</td>
+                        <td>Femenino</td>
+                        <td>pagalosbarrosluco@gmail.com</td>
+                        <td>+56912345678</td>
+                        <td class="text-center">
+                            <a href="{% url 'suspendUser' %}">
+                                <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Suspender</button>
+                            </a>
+                            <a href="{% url 'deleteUser' %}">
+                                <button type="button" class="btn btn-danger d-inline-block mx-1 my-1"><i class="bi bi-ban"></i>Eliminar</button>
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>Simón</td>
+                        <td>Muñoz</td>
+                        <td>Biorka</td>
+                        <td>Otro</td>
+                        <td>maloconkayn@gmail.com</td>
+                        <td>+56987654321</td>
+                        <td class="text-center">
+                            <a href="{% url 'suspendUser' %}">
+                                <button type="button" class="btn btn-success d-inline-block mx-1"><i class="bi bi-bandaid"></i>Suspender</button>
+                            </a>
+                            <a href="{% url 'deleteUser' %}">
+                                <button type="button" class="btn btn-danger d-inline-block mx-1"><i class="bi bi-ban"></i>Eliminar</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock contenido %}
