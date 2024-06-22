@@ -1,83 +1,35 @@
 {% extends "gamewebstore/base.html" %}
 {%load static%}
+{% load crispy_forms_tags %}
 {% block contenido %}
 
-    <!-- Editar perfil -->
-    <div class="container rounded bg-white mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-3 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class="rounded-circle mt-5" width="150px" src="https://i.imgur.com/wvxPV9S.png">
-                    <span class="font-weight-bold">Axel Silva</span>
-                    <span class="font-weight-bold">@axel123</span>
-                    <span class="text-black-50">pagalosbarrosluco@gmail.com</span>
-                </div>
-            </div>
+    <!-- REGISTRO -->
+    <section class="vh-100">
+        <div class="container py-5 h-100 animate__animated animate__backInLeft">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Editar perfil</h3>
 
-            <div class="col-md-5 border-right">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Editar perfil</h4>
+                            <form action="" method="post" onsubmit="return validarGender() && validarPass()">
+                                {% csrf_token %} 
+                                {{form|crispy}}
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-dark btn-lg">Guardar</button>
+                                </div>
+                                <div class="d-grid mt-3">
+                                    <a href="{% url "userProfile" %}">
+                                        <button type="button" class="btn btn-secondary btn-lg">Volver</button>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-
-                    <form action="{% url 'userProfile' %}" class="was-validated" method="post">
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                <label class="form-label" for="nombre">Nombre</label>
-                                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre"
-                                    pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]+" required minlength="2">
-                                <div class="invalid-feedback">Al menos 2 caracteres, no se permiten números
-                                    ni caracteres especiales</div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label" for="apellido">Apellido</label>
-                                <input type="text" class="form-control" id="apellido" name="apellido"
-                                    placeholder="Apellido" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]+" required minlength="2">
-                                <div class="invalid-feedback">Al menos 2 caracteres, no se permiten números
-                                    ni caracteres especiales</div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label class="form-label" for="telefono">Número de teléfono</label>
-                                <input type="tel" id="telefono" name="telefono" class="form-control"
-                                    placeholder="Número de telefóno" pattern="^\d{8}$" required minlength="8"
-                                    maxlength="8">
-                                <div class="invalid-feedback">Ejemplo: 12345678</div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 mt-3">
-                                <label class="form-label" for="ciudad">Ciudad</label>
-                                <select id="ciudad" name="ciudad" class="form-control" required />
-                                <option value="">Selecciona una ciudad...</option>
-                                <option value="santiago">Santiago</option>
-                                <option value="valparaiso">Valparaíso</option>
-                                <option value="concepcion">Concepción</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 mt-3">
-                                <label class="form-label" for="direccion">Dirección</label>
-                                <input type="text" id="direccion" name="direccion" class="form-control"
-                                    placeholder="Dirección" pattern=".*\d.*" required minlength="3" maxlength="20">
-                                <div class="invalid-feedback">Ejemplo: Paicaví 516</div>
-                            </div>
-                        </div>
-
-                        <div class="mt-5 text-center">
-                            <button class="btn btn-dark profile-button" type="submit">Guardar perfil</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
-    </div>
-
+    </section>
     <script src='{% static "gamewebstore/js/scripts.js" %}'></script>
 {% endblock contenido %}

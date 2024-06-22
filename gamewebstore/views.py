@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.models import User
-from .models import Juego
-from .forms import JuegoForm, UpdateJuegoForm, UserForm
+from .models import Juego, Perfil
+from .forms import JuegoForm, UpdateJuegoForm, UserForm, PerfilForm
 from django.contrib import messages
 from os import remove, path
 from django.conf import settings
@@ -30,7 +30,11 @@ def adminGames(request):
     return render(request,'gamewebstore/adminGames.html', datos)
 
 def administrador(request):
-    return render(request,'gamewebstore/administrador.html')
+    perfiles = Perfil.objects.all()
+    datos = {
+        "perfiles": perfiles
+    }
+    return render(request,'gamewebstore/administrador.html', datos)
 
 def carrito(request):
     return render(request,'gamewebstore/carrito.html')
@@ -69,6 +73,17 @@ def deleteGame(request, id):
     return render(request,'gamewebstore/deleteGame.html', datos)
 
 def deleteUser(request):
+    juego=get_object_or_404(Juego, id=id)
+    
+    if request.method=="POST":
+        remove(path.join(str(settings.MEDIA_ROOT).replace('/media',''))+juego.foto_juego.url)
+        juego.delete()
+        messages.warning(request,"Juego eliminado")
+        return redirect(to="adminGames")
+        
+    datos={
+        "juego":juego
+    }
     return render(request,'gamewebstore/deleteUser.html')
 
 def descriptionGame(request, id):
@@ -81,7 +96,25 @@ def descriptionGame(request, id):
     return render(request,'gamewebstore/descriptionGame.html', datos)
 
 def editarPerfil(request):
-    return render(request,'gamewebstore/editarPerfil.html')
+    usr = request.user
+    perfil_existente = Perfil.objects.filter(usuario=usr).first()
+
+    if request.method == "POST":
+        form = PerfilForm(data=request.POST, instance=perfil_existente)
+        if form.is_valid():
+            perfil = form.save(commit=False)
+            perfil.usuario = usr
+            perfil.save()
+            messages.warning(request,"Perfil modificado")
+            return redirect(to="userProfile")
+    else:
+        if perfil_existente:
+            form = PerfilForm(instance=perfil_existente)
+        else:
+            form = PerfilForm()
+
+    datos = {"form": form}
+    return render(request, 'gamewebstore/editarPerfil.html', datos)
 
 def forgetPassword(request):
     return render(request,'gamewebstore/forgetPassword.html')
@@ -112,7 +145,14 @@ def suspendUser(request):
     return render(request,'gamewebstore/suspendUser.html')
 
 def userProfile(request):
-    return render(request,'gamewebstore/userProfile.html')
+    usr = request.user
+    perfil_usuario, created = Perfil.objects.get_or_create(usuario=usr)
+    
+    datos = {
+        'perfil': perfil_usuario
+    }
+
+    return render(request,'gamewebstore/userProfile.html', datos)
 
 def vistaCompras(request):
     return render(request,'gamewebstore/vistaCompras.html')

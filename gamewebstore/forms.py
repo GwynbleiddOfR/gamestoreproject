@@ -7,6 +7,12 @@ from django.contrib.auth.forms import UserCreationForm
 class UserForm(UserCreationForm):
     pass
 
+class PerfilForm(forms.ModelForm):
+
+    class Meta:
+        model=Perfil
+        fields=['telefono', 'ciudad', 'direccion']
+
 #Juegos
 class JuegoForm(forms.ModelForm):
 

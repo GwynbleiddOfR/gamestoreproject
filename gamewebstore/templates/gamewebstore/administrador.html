@@ -28,48 +28,34 @@
                         <th class="bg-dark text-white">Nombre</th>
                         <th class="bg-dark text-white">Apellido</th>
                         <th class="bg-dark text-white">Nombre de usuario</th>
-                        <th class="bg-dark text-white">Sexo</th>
                         <th class="bg-dark text-white">Correo electrónico</th>
                         <th class="bg-dark text-white">Número de telefóno</th>
+                        <th class="bg-dark text-white">Ciudad</th>
+                        <th class="bg-dark text-white">Dirección</th>
                         <th class="bg-dark text-white">Acción</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Axel</td>
-                        <td>Silva</td>
-                        <td>axel123</td>
-                        <td>Femenino</td>
-                        <td>pagalosbarrosluco@gmail.com</td>
-                        <td>+56912345678</td>
-                        <td class="text-center">
-                            <a href="{% url 'suspendUser' %}">
-                                <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Suspender</button>
-                            </a>
-                            <a href="{% url 'deleteUser' %}">
-                                <button type="button" class="btn btn-danger d-inline-block mx-1 my-1"><i class="bi bi-ban"></i>Eliminar</button>
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>2</td>
-                        <td>Simón</td>
-                        <td>Muñoz</td>
-                        <td>Biorka</td>
-                        <td>Otro</td>
-                        <td>maloconkayn@gmail.com</td>
-                        <td>+56987654321</td>
-                        <td class="text-center">
-                            <a href="{% url 'suspendUser' %}">
-                                <button type="button" class="btn btn-success d-inline-block mx-1"><i class="bi bi-bandaid"></i>Suspender</button>
-                            </a>
-                            <a href="{% url 'deleteUser' %}">
-                                <button type="button" class="btn btn-danger d-inline-block mx-1"><i class="bi bi-ban"></i>Eliminar</button>
-                            </a>
-                        </td>
-                    </tr>
+                    {% for p in perfiles %}
+                        <tr>
+                            <td>{{p.usuario.id}}</td>
+                            <td>Axel</td>
+                            <td>Silva</td>
+                            <td>{{p.usuario.username}}</td>
+                            <td>pagalosbarrosluco@gmail.com</td>
+                            <td>+569 {{p.telefono}}</td>
+                            <td>{{p.ciudad}}</td>
+                            <td>{{p.direccion}}</td>
+                            <td class="text-center">
+                                <a href="{% url 'suspendUser' %}">
+                                    <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Suspender</button>
+                                </a>
+                                <a href="{% url 'deleteUser' %}">
+                                    <button type="button" class="btn btn-danger d-inline-block mx-1 my-1"><i class="bi bi-ban"></i>Eliminar</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

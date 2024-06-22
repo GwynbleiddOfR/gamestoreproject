@@ -5,3 +5,9 @@ TIPO_CONSOLA={
     ("PS4", "PLAYSTATION 4"),
     ("PS5", "PLAYSTATION 5")
 }
+
+CIUDAD={
+    ("Concepción", "Concepción"),
+    ("Santiago", "Santiago"),
+    ("Valparaíso", "Valparaíso")
+}

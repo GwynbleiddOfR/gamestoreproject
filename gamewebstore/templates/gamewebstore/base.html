@@ -36,14 +36,11 @@
                         <a class="nav-link active text-white" aria-current="page" href="{% url 'index' %}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{% url 'userProfile' %}">Mi perfil</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link text-white" href="{% url 'administrador' %}">Admin</a>
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="">Hola <div class="text-primary">{{user.username}}</div></a>
+                            <a class="nav-link text-white" href="{% url "userProfile" %}">Hola <div class="text-primary">{{user.username}}</div></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{% url 'cerrar_sesion' %}">Cerrar sesión</a>
