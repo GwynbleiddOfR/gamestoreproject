@@ -3,10 +3,11 @@ from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.models import User
 from .models import Juego
-from .forms import JuegoForm, UpdateJuegoForm
+from .forms import JuegoForm, UpdateJuegoForm, UserForm
 from django.contrib import messages
 from os import remove, path
 from django.conf import settings
+from django.contrib.auth.models import User
 
 # Create your views here.
 def cerrar_sesion(request):
@@ -92,7 +93,20 @@ def msgVerificarEmail(request):
     return render(request,'gamewebstore/msgVerificarEmail.html')
 
 def register(request):
-    return render(request,'gamewebstore/register.html')
+    form=UserForm()
+
+    if request.method=="POST":
+        form=UserForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+
+            return redirect(to="login")
+
+    datos={
+        "form":form
+    }
+
+    return render(request,'registration/register.html', datos)
 
 def suspendUser(request):
     return render(request,'gamewebstore/suspendUser.html')

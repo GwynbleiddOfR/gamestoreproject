@@ -1,5 +1,7 @@
 from django.urls import include, path
-from .views import index, adminGames, administrador, carrito, modificarjuego, deleteGame, deleteUser, descriptionGame, editarPerfil, forgetPassword, gatoRandom, msgVerificarEmail, register, suspendUser, userProfile, vistaCompras, vistaVender, vistaVentas, cerrar_sesion
+from .views import index, adminGames, administrador, carrito, modificarjuego, deleteGame, deleteUser, descriptionGame, \
+editarPerfil, forgetPassword, gatoRandom, msgVerificarEmail, register, suspendUser, userProfile, vistaCompras, vistaVender, \
+vistaVentas, cerrar_sesion
 from django.conf import settings
 from django.conf.urls.static import static
 

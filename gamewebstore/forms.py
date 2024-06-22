@@ -1,6 +1,11 @@
 from django import forms
 from .models import *
 from .enumeraciones import *
+from django.contrib.auth.forms import UserCreationForm
+
+# Usuarios
+class UserForm(UserCreationForm):
+    pass
 
 #Juegos
 class JuegoForm(forms.ModelForm):
