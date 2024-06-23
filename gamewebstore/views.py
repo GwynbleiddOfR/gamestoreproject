@@ -242,8 +242,15 @@ def userProfile(request):
 
     return render(request,'gamewebstore/userProfile.html', datos)
 
+@login_required
 def vistaCompras(request):
-    return render(request,'gamewebstore/vistaCompras.html')
+    ventas = Venta.objects.filter(usuario=request.user).order_by('-fecha')
+
+    datos={
+        "ventas":ventas
+    }
+
+    return render(request,'gamewebstore/vistaCompras.html', datos)
 
 def vistaVender(request):
     form=JuegoForm()

@@ -1,7 +1,7 @@
 {% extends "gamewebstore/base.html" %}
-{%load static%}
-{% block contenido %}
+{% load static %}
 
+{% block contenido %}
     <div class="container mt-3">
         <h2>Mis compras</h2>
         <a href="{% url 'userProfile' %}" class="btn btn-dark my-4 mx-1">Volver a mi perfil</a>
@@ -16,12 +16,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for venta in ventas %}
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ venta.juego.nomb_juego }}</td>
+                            <td>$ {{ venta.juego.precio }}</td>
+                            <td>{{ venta.cantidad }}</td>
+                            <td>{{ venta.estado }}</td>
                         </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

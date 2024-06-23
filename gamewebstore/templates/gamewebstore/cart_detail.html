@@ -41,8 +41,8 @@
             {% endfor %}
         </tbody>
     </table>
-    <h3>Total: $ {{ cart.total }}</h3>
+    <h3 class="mt-5">Total: $ {{ cart.total }}</h3>
     <a href="{% url 'process_payment' %}">
-        <button type="button" class="btn btn-success">Pagar $$</button>
+        <button type="button" class="btn btn-success mt-1">Pagar $$</button>
     </a>
 {% endblock contenido %}
