@@ -1,7 +1,7 @@
 {% extends "gamewebstore/base.html" %}
-{%load static%}
-{% block contenido %}
+{% load static %}
 
+{% block contenido %}
     <div class="container mt-3">
         <h2>Ventas</h2>
         <a href="{% url 'adminGames' %}" class="btn btn-dark my-4 mx-1">Volver al admin</a>
@@ -9,19 +9,31 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th class="bg-dark text-white">ID</th>
-                        <th class="bg-dark text-white">Juego</th>
-                        <th class="bg-dark text-white">Cantidad ventas</th>
-                        <th class="bg-dark text-white">Total de ventas</th>
+                        <th class="bg-dark text-white">ID venta</th>
+                        <th class="bg-dark text-white">ID juego</th>
+                        <th class="bg-dark text-white">Nombre juego</th>
+                        <th class="bg-dark text-white">Consola</th>
+                        <th class="bg-dark text-white">Cantidad vendida</th>
+                        <th class="bg-dark text-white">Total venta</th>
+                        <th class="bg-dark text-white">Usuario</th>
+                        <th class="bg-dark text-white">Estado</th>
+                        <th class="bg-dark text-white">Fecha venta</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for venta in ventas %}
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ venta.id }}</td>
+                            <td>{{ venta.juego.id }}</td>
+                            <td>{{ venta.juego.nomb_juego }}</td>
+                            <td>{{ venta.juego.consola }}</td>
+                            <td>{{ venta.cantidad }}</td>
+                            <td>$ {{ venta.total_venta }}</td>
+                            <td>{{ venta.usuario.username }}</td>
+                            <td>{{ venta.estado }}</td>
+                            <td>{{ venta.fecha }}</td>
                         </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

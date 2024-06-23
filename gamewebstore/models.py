@@ -40,3 +40,15 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"Cart for {self.usuario}"
+    
+# Ventas
+class Venta(models.Model):
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Usuario")
+    juego = models.ForeignKey(Juego, on_delete=models.CASCADE, verbose_name="Juego")
+    cantidad = models.PositiveIntegerField()
+    total_venta = models.PositiveIntegerField()
+    fecha = models.DateTimeField(auto_now_add=True)
+    estado = models.CharField(max_length=10, choices=ESTADO, default='pendiente')
+
+    def __str__(self):
+        return f"Venta {self.id} - {self.juego.nomb_juego} - {self.cantidad} unidades"

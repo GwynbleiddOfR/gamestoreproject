@@ -8,6 +8,7 @@
     <h2>Tu carrito de compras</h2>
 
     <div class="table-responsive my-3">
+        <a href="{% url "index" %}" class="btn btn-dark my-3">Seguir comprando...</a>
         <table class="table table-bordered">
         <thead>
             <tr>
@@ -40,7 +41,7 @@
             {% endfor %}
         </tbody>
     </table>
-    <h3>Total: {{ cart.total }}</h3>
+    <h3>Total: $ {{ cart.total }}</h3>
     <a href="{% url 'process_payment' %}">
         <button type="button" class="btn btn-success">Pagar $$</button>
     </a>

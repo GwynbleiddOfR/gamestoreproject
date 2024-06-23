@@ -2,13 +2,14 @@ from django.shortcuts import render
 from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.models import User
-from .models import Juego, Perfil, Cart, CartItem
+from .models import Juego, Perfil, Cart, CartItem, Venta
 from .forms import JuegoForm, UpdateJuegoForm, UserForm, PerfilForm, UpdatePerfilForm
 from django.contrib import messages
 from os import remove, path
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 # Create your views here.
 def cerrar_sesion(request):
@@ -89,6 +90,15 @@ def process_payment(request):
         if item.cantidad > juego.stock:
             messages.error(request, f'No hay suficiente stock para {juego.nomb_juego}.')
             return redirect('cart_detail')
+        
+        Venta.objects.create(
+                usuario=request.user,
+                juego=juego,
+                cantidad=item.cantidad,
+                total_venta=item.subtotal(),
+                estado='pendiente',  # Estado inicial de la venta
+                fecha=timezone.now()
+            )
         
     for item in cart.items.all():
         juego = item.juego
@@ -251,4 +261,10 @@ def vistaVender(request):
     return render(request,'gamewebstore/vistaVender.html', datos)
 
 def vistaVentas(request):
-    return render(request,'gamewebstore/vistaVentas.html')
+    ventas = Venta.objects.all().order_by('-fecha')
+
+    datos={
+        "ventas":ventas
+    }
+
+    return render(request, 'gamewebstore/vistaVentas.html', datos)

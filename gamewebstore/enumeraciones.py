@@ -11,3 +11,9 @@ CIUDAD={
     ("Santiago", "Santiago"),
     ("Valparaíso", "Valparaíso")
 }
+
+ESTADO={
+    ('pendiente', 'Pendiente'),
+    ('completado', 'Completado'),
+    ('enviado', 'Enviado')
+}
