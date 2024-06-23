@@ -10,7 +10,7 @@
                 <div class="col-12 col-lg-9 col-xl-7">
                     <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                         <div class="card-body p-4 p-md-5">
-                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Editar perfil</h3>
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Modificar información</h3>
 
                             <form action="" method="post" onsubmit="return validarGender() && validarPass()">
                                 {% csrf_token %} 
@@ -20,7 +20,7 @@
                                     <button type="submit" class="btn btn-dark btn-lg">Guardar</button>
                                 </div>
                                 <div class="d-grid mt-3">
-                                    <a href="{% url 'userProfile' %}" class="btn btn-secondary btn-lg d-block">Volver</a>
+                                    <a href="{% url 'administrador' %}" class="btn btn-secondary btn-lg d-block">Volver</a>
                                 </div>
                             </form>
                         </div>

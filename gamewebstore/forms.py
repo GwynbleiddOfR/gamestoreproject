@@ -13,6 +13,12 @@ class PerfilForm(forms.ModelForm):
         model=Perfil
         fields=['telefono', 'ciudad', 'direccion']
 
+class UpdatePerfilForm(forms.ModelForm):
+
+    class Meta:
+        model=Perfil
+        fields=['telefono', 'ciudad', 'direccion']
+
 #Juegos
 class JuegoForm(forms.ModelForm):
 

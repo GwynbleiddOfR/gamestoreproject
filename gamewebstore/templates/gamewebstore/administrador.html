@@ -47,10 +47,10 @@
                             <td>{{p.ciudad}}</td>
                             <td>{{p.direccion}}</td>
                             <td class="text-center">
-                                <a href="{% url 'suspendUser' %}">
-                                    <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Suspender</button>
+                                <a href="{% url 'editarusuario' p.usuario.id %}">
+                                    <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Editar</button>
                                 </a>
-                                <a href="{% url 'deleteUser' %}">
+                                <a href="{% url 'deleteUser' p.usuario.id %}">
                                     <button type="button" class="btn btn-danger d-inline-block mx-1 my-1"><i class="bi bi-ban"></i>Eliminar</button>
                                 </a>
                             </td>

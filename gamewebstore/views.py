@@ -3,7 +3,7 @@ from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.models import User
 from .models import Juego, Perfil
-from .forms import JuegoForm, UpdateJuegoForm, UserForm, PerfilForm
+from .forms import JuegoForm, UpdateJuegoForm, UserForm, PerfilForm, UpdatePerfilForm
 from django.contrib import messages
 from os import remove, path
 from django.conf import settings
@@ -72,19 +72,20 @@ def deleteGame(request, id):
 
     return render(request,'gamewebstore/deleteGame.html', datos)
 
-def deleteUser(request):
-    juego=get_object_or_404(Juego, id=id)
+def deleteUser(request, id):
+    usuario = get_object_or_404(User, id=id)
     
-    if request.method=="POST":
-        remove(path.join(str(settings.MEDIA_ROOT).replace('/media',''))+juego.foto_juego.url)
-        juego.delete()
-        messages.warning(request,"Juego eliminado")
-        return redirect(to="adminGames")
+    if request.method == "POST":
+        Perfil.objects.filter(usuario=usuario).delete()
+        usuario.delete()
+        messages.warning(request, "Usuario eliminado")
+        return redirect(to="administrador")
         
-    datos={
-        "juego":juego
+    datos = {
+        "usuario": usuario
     }
-    return render(request,'gamewebstore/deleteUser.html')
+
+    return render(request,'gamewebstore/deleteUser.html', datos)
 
 def descriptionGame(request, id):
     juego=get_object_or_404(Juego, id=id)
@@ -141,8 +142,24 @@ def register(request):
 
     return render(request,'registration/register.html', datos)
 
-def suspendUser(request):
-    return render(request,'gamewebstore/suspendUser.html')
+def editarusuario(request, id):
+    usuario = get_object_or_404(User, id=id)
+    perfil_usuario = get_object_or_404(Perfil, usuario=usuario)
+    
+    if request.method == "POST":
+        form = UpdatePerfilForm(request.POST, instance=perfil_usuario)
+        if form.is_valid():
+            form.save()
+            messages.warning(request, "Usuario modificado")
+            return redirect('administrador')
+    else:
+        form = UpdatePerfilForm(instance=perfil_usuario)
+
+    datos = {
+        'form': form
+    }
+
+    return render(request,'gamewebstore/editarusuario.html', datos)
 
 def userProfile(request):
     usr = request.user
