@@ -50,5 +50,8 @@ class Venta(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
     estado = models.CharField(max_length=10, choices=ESTADO, default='pendiente')
 
+    def total_venta(self):
+        return self.cantidad * self.juego.precio
+
     def __str__(self):
         return f"Venta {self.id} - {self.juego.nomb_juego} - {self.cantidad} unidades"

@@ -19,7 +19,7 @@
                     {% for venta in ventas %}
                         <tr>
                             <td>{{ venta.juego.nomb_juego }}</td>
-                            <td>$ {{ venta.juego.precio }}</td>
+                            <td>$ {{ venta.total_venta }}</td>
                             <td>{{ venta.cantidad }}</td>
                             <td>{{ venta.estado }}</td>
                         </tr>

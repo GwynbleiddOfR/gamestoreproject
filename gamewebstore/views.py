@@ -95,7 +95,6 @@ def process_payment(request):
                 usuario=request.user,
                 juego=juego,
                 cantidad=item.cantidad,
-                total_venta=item.subtotal(),
                 estado='pendiente',  # Estado inicial de la venta
                 fecha=timezone.now()
             )
