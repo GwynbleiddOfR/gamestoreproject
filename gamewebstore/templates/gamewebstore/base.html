@@ -60,7 +60,7 @@
                     </form>
 
                     <div class="user-icons d-flex mb-2">
-                        <a href="{% url 'carrito' %}">
+                        <a href="{% url 'cart_detail' %}">
                             <div class="cart"><i class="bi bi-cart-fill" style = "color:white;"></i></div>
                         </a>
                     </div>
@@ -87,6 +87,17 @@
                         title: '¡OPERACIÓN REALIZADA!',
                         text: '{{message}}',
                         icon: 'warning',
+                        confirmButtonText: 'Aceptar'
+                    })
+                </script>
+            {% endif %}
+
+            {% if message.level == 40 %}
+                <script>
+                    Swal.fire({
+                        title: '¡ERROR!',
+                        text: '{{message}}',
+                        icon: 'error',
                         confirmButtonText: 'Aceptar'
                     })
                 </script>

@@ -1,7 +1,7 @@
 from django.urls import include, path
-from .views import index, adminGames, administrador, carrito, modificarjuego, deleteGame, deleteUser, descriptionGame, \
+from .views import index, adminGames, administrador, modificarjuego, deleteGame, deleteUser, descriptionGame, \
 editarPerfil, forgetPassword, gatoRandom, msgVerificarEmail, register, editarusuario, userProfile, vistaCompras, vistaVender, \
-vistaVentas, cerrar_sesion
+vistaVentas, cerrar_sesion, add_to_cart, update_cart_item, remove_from_cart, cart_detail, process_payment
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -9,7 +9,11 @@ urlpatterns = [
     path('', index, name='index'),
     path('adminGames/', adminGames, name='adminGames'),
     path('administrador/', administrador, name='administrador'),
-    path('carrito/', carrito, name='carrito'),
+    path('cart_detail/', cart_detail, name='cart_detail'),
+    path('add/<int:juego_id>/', add_to_cart, name='add_to_cart'),
+    path('update/<int:item_id>/', update_cart_item, name='update_cart_item'),
+    path('remove/<int:item_id>/', remove_from_cart, name='remove_from_cart'),
+    path('process_payment/', process_payment, name='process_payment'),
     path('modificarjuego/<id>', modificarjuego, name='modificarjuego'),
     path('deleteGame/<id>', deleteGame, name='deleteGame'),
     path('deleteUser/<id>', deleteUser, name='deleteUser'),

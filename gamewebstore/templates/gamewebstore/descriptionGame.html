@@ -40,24 +40,11 @@
                         </div>
 
                         <hr />
-
-                        <div class="row mb-4">
-                            <div class="col-md-4 col-6 mb-3">
-                                <input type="number" placeholder="1" value="1" min="1" class="input-cantidad"
-                                    id="cantidadJuego" oninput="validarLongitudInput('cantidadJuego', 2)">
-
-                                <div class="btn-up-down">
-                                    <i class="fa-solid fa-chevron-up" id="up"></i>
-                                    <i class="fa-solid fa-chevron-down" id="down"></i>
-
-                                </div>
-                            </div>
-                             
+                    
 
                             <div class="col-md-8 col-6">
-                                <a href="{% url 'carrito' %}" class="btn btn-dark shadow-0"> <i class="bi bi-cart-fill"></i>
-                                    Agregar
-                                    al carrito </a>
+                                <a href="{% url 'index' %}" class="btn btn-dark shadow-0">
+                                    Volver al inicio </a>
                             </div>
                         </div>
                 </main>

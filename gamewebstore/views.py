@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.models import User
-from .models import Juego, Perfil
+from .models import Juego, Perfil, Cart, CartItem
 from .forms import JuegoForm, UpdateJuegoForm, UserForm, PerfilForm, UpdatePerfilForm
 from django.contrib import messages
 from os import remove, path
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def cerrar_sesion(request):
@@ -38,6 +39,66 @@ def administrador(request):
 
 def carrito(request):
     return render(request,'gamewebstore/carrito.html')
+
+@login_required
+def add_to_cart(request, juego_id):
+    juego = get_object_or_404(Juego, id=juego_id)
+    cart, created = Cart.objects.get_or_create(usuario=request.user)
+
+    cart_item, created = CartItem.objects.get_or_create(juego=juego, precio_por_item=juego.precio)
+    if not created:
+        cart_item.cantidad += 1
+        cart_item.save()
+
+    cart.items.add(cart_item)
+    messages.success(request, f'{juego.nomb_juego} fue añadido a tu carrito.')
+
+    return redirect('cart_detail')
+
+@login_required
+def cart_detail(request):
+    cart, created = Cart.objects.get_or_create(usuario=request.user)
+    return render(request, 'gamewebstore/cart_detail.html', {'cart': cart})
+
+@login_required
+def update_cart_item(request, item_id):
+    cart_item = get_object_or_404(CartItem, id=item_id)
+    if request.method == 'POST':
+        cantidad = int(request.POST.get('cantidad', 1))
+        cart_item.cantidad = cantidad
+        cart_item.save()
+        messages.success(request, 'La cantidad fue actualizada.')
+    return redirect('cart_detail')
+
+@login_required
+def remove_from_cart(request, item_id):
+    cart_item = get_object_or_404(CartItem, id=item_id)
+    cart_item.delete()
+    messages.success(request, 'El ítem fue eliminado del carrito.')
+    return redirect('cart_detail')
+
+@login_required
+def process_payment(request):
+    cart, created = Cart.objects.get_or_create(usuario=request.user)
+    if not cart.items.exists():
+        messages.error(request, 'No tienes artículos en tu carrito.')
+        return redirect('cart_detail')
+
+    for item in cart.items.all():
+        juego = item.juego
+        if item.cantidad > juego.stock:
+            messages.error(request, f'No hay suficiente stock para {juego.nomb_juego}.')
+            return redirect('cart_detail')
+        
+    for item in cart.items.all():
+        juego = item.juego
+        juego.stock -= item.cantidad
+        juego.save()
+
+    cart.items.clear()
+    
+    messages.success(request, 'Pago realizado con éxito. Gracias por tu compra.')
+    return redirect('cart_detail')
 
 def modificarjuego(request, id):
     juego = get_object_or_404(Juego, id=id)

@@ -1,0 +1,47 @@
+<!-- templates/cart/cart_detail.html -->
+{% extends "gamewebstore/base.html" %}
+{%load static%}
+{% load crispy_forms_tags %}
+{% block contenido %}
+
+<div class="container mt-5">
+    <h2>Tu carrito de compras</h2>
+
+    <div class="table-responsive my-3">
+        <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="bg-dark text-white">Juego</th>
+                <th class="bg-dark text-white">Cantidad</th>
+                <th class="bg-dark text-white">Stock disponible</th>
+                <th class="bg-dark text-white">Precio por ítem</th>
+                <th class="bg-dark text-white">Subtotal</th>
+                <th class="bg-dark text-white">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart.items.all %}
+            <tr>
+                <td>{{ item.juego.nomb_juego }}</td>
+                <td>
+                    <form method="post" action="{% url 'update_cart_item' item.id %}">
+                        {% csrf_token %}
+                        <input type="number" name="cantidad" value="{{ item.cantidad }}" min="1">
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </form>
+                </td>
+                <td>{{ item.juego.stock }}</td>
+                <td>${{ item.precio_por_item }}</td>
+                <td>${{ item.subtotal }}</td>
+                <td>
+                        <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Total: {{ cart.total }}</h3>
+    <a href="{% url 'process_payment' %}">
+        <button type="button" class="btn btn-success">Pagar $$</button>
+    </a>
+{% endblock contenido %}

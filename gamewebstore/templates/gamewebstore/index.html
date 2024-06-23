@@ -29,11 +29,14 @@
                             </div>
                             <div class="text-center">
                                 <p class="text-capitalize my-1">{{j.nomb_juego}}</p>
-                                <span class="fw-bold d-block">{{j.precio}}</span>
+                                <span class="fw-bold d-block">${{j.precio}}</span>
                                 
-                                <a href="{% url 'login' %}">
+                                <a href="{% url 'add_to_cart' j.id %}">
                                     <button type="button" class="btn m-2 text-dark">Agregar al carrito</button>
                                 </a>
+                            </div>
+                            <div class="text-center">
+                                <a href="{% url "descriptionGame" j.id %}" class="btn btn-dark">Ver detalles</a>
                             </div>
                         </div>
                     {% endfor %}
