@@ -24,7 +24,7 @@
     <nav class="navbar navbar-expand-md bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
-                <img src="{% static 'gamewebstore/img/whitewolf.png' %}" alt="White Wolf Logo" style="margin-right: 10px;"> 
+                <img src="{% static 'gamewebstore/img/whitewolflogo.jpg' %}" alt="White Wolf Logo" style="margin-right: 10px;"> 
                 <h4 class="text-white" style="margin: 0">White Wolf</h4>
             </a>
             <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,17 +53,16 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{% url 'register' %}">Registrarse</a>
                     </li>
-                </ul>
-                <div class="search-and-icons">
-                    <form class="d-flex mb-2 me-4" role="search">
-                        <input class="form-control me-2" type="search" aria-label="Search">
-                    </form>
-
                     <div class="user-icons d-flex mb-2">
                         <a href="{% url 'cart_detail' %}">
                             <div class="cart"><i class="bi bi-cart-fill" style = "color:white;"></i></div>
                         </a>
                     </div>
+                </ul>
+                <div class="search-and-icons">
+
+
+                    
                 </div>
             </div>
         </div>

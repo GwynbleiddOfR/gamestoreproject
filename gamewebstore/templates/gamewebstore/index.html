@@ -11,14 +11,32 @@
             </div>
 
             <div class="row">
-                <div class="d-flex flex-wrap justify-content-center mt-5 filter-button-group">
-                    <button type="button" class="btn m-2 text-dark active-filter-btn">Todos</button>
-                    <button type="button" class="btn m-2 text-dark">PS1</button>
-                    <button type="button" class="btn m-2 text-dark">PS2</button>
-                    <button type="button" class="btn m-2 text-dark">PS3</button>
-                    <button type="button" class="btn m-2 text-dark">PS4</button>
-                    <button type="button" class="btn m-2 text-dark">PS5</button>
-                </sdiv>
+                    <div class="d-flex flex-wrap justify-content-center mt-5 filter-button-group">
+                        <form method="GET" action="" class="d-inline">
+                            <button type="submit" class="btn m-2 text-dark active-filter-btn" name="consola" value="">Todos</button>
+                        </form>
+                        <form method="GET" action="" class="d-inline">
+                            <button type="submit" class="btn m-2 text-dark" name="consola" value="PS1">PS1</button>
+                        </form>
+                        <form method="GET" action="" class="d-inline">
+                            <button type="submit" class="btn m-2 text-dark" name="consola" value="PS2">PS2</button>
+                        </form>
+                        <form method="GET" action="" class="d-inline">
+                            <button type="submit" class="btn m-2 text-dark" name="consola" value="PS3">PS3</button>
+                        </form>
+                        <form method="GET" action="" class="d-inline">
+                            <button type="submit" class="btn m-2 text-dark" name="consola" value="PS4">PS4</button>
+                        </form>
+                        <form method="GET" action="" class="d-inline">
+                            <button type="submit" class="btn m-2 text-dark" name="consola" value="PS5">PS5</button>
+                        </form>
+                    </div>
+                </div>
+            
+                
+                <form class="d-flex mt-4 mb-5 me-4" role="search">
+                    <input class="form-control form-control-lg me-2" type="search" aria-label="Search" placeholder="Buscar juego..." style="max-width: 300px;" method="GET" name="q">
+                </form>
 
                 <div class="collection-list mt-4 row">
                     {% for j in juegos %}
@@ -36,7 +54,7 @@
                                 </a>
                             </div>
                             <div class="text-center">
-                                <a href="{% url "descriptionGame" j.id %}" class="btn btn-dark">Ver detalles</a>
+                                <a href="{% url 'descriptionGame' j.id %}" class="btn btn-dark">Ver detalles</a>
                             </div>
                         </div>
                     {% endfor %}

@@ -17,10 +17,25 @@ def cerrar_sesion(request):
     return redirect(to='index')
 
 def index(request):
-    juegos=Juego.objects.all()
-    datos={
-        "juegos":juegos
+    query = request.GET.get('q')
+    consola = request.GET.get('consola')
+    
+    if query:
+        juegos = Juego.objects.filter(nomb_juego__icontains=query)
+        if not juegos.exists():
+            juegos = Juego.objects.all()
+    else:
+        juegos = Juego.objects.all()
+    
+    if consola:
+        juegos_filtrados = juegos.filter(consola=consola)
+        if juegos_filtrados.exists():
+            juegos = juegos_filtrados
+    
+    datos = {
+        "juegos": juegos
     }
+
     return render(request,'gamewebstore/index.html', datos)
 
 def adminGames(request):
