@@ -10,6 +10,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.db.models import Q
 
 # Create your views here.
 def cerrar_sesion(request):
@@ -41,7 +42,15 @@ def index(request):
 def adminGames(request):
     query = request.GET.get('q')
     if query:
-        juegos = Juego.objects.filter(nomb_juego__icontains=query)
+        juegos = Juego.objects.filter(
+            Q(nomb_juego__icontains=query) | 
+            Q(id__icontains=query) |
+            Q(genero__icontains=query) |
+            Q(consola__icontains=query) |
+            Q(precio__icontains=query) |
+            Q(stock__icontains=query) |
+            Q(descripcion__icontains=query)
+        )
         if not juegos.exists():
             juegos = Juego.objects.all()
     else:
@@ -54,7 +63,24 @@ def adminGames(request):
     return render(request,'gamewebstore/adminGames.html', datos)
 
 def administrador(request):
-    perfiles = Perfil.objects.all()
+    query = request.GET.get('q')
+    
+    if query:
+        perfiles = Perfil.objects.filter(
+            Q(usuario__id__icontains=query) |
+            Q(usuario__username__icontains=query) |
+            Q(usuario__first_name__icontains=query) |
+            Q(usuario__last_name__icontains=query) |
+            Q(usuario__email__icontains=query) |
+            Q(telefono__icontains=query) |
+            Q(ciudad__icontains=query) |
+            Q(direccion__icontains=query)
+        )
+        if not perfiles.exists():
+            perfiles = Perfil.objects.all()
+    else:
+        perfiles = Perfil.objects.all()
+    
     datos = {
         "perfiles": perfiles
     }

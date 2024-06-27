@@ -4,19 +4,20 @@
 
     <!-- Lista de usuarios -->
     <div class="container mt-3">
-        <p class="mb-0 display-5">Opciones de administrador</p>
+        <p class="mb-0 display-5">Opciones de administrador / Usuarios</p>
         <a href="{% url 'administrador' %}" class="btn btn-dark my-4 mx-1">Administrar usuarios</a>
         <a href="{% url 'adminGames' %}" class="btn btn-dark my-1 mx-1">Administrar juegos</a>
         <form class="mt-3">
             <div class="form-row align-items-center">
                 <div class="col-auto">
-                    <div class="form-group mb-0">
-                        <input type="text" class="form-control" id="adminBuscarUser" placeholder="Ingresa ID">
-                    </div>
+                    <form role="search"> 
+                        <div class="mb-0">
+                            <input type="text" class="form-control" id="adminBuscarUser" placeholder="Buscar usuario... (ID, Nombre, etc)" method="GET" name="q">
+                        </div>
+                    </form>
                 </div>
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-dark mt-3">Buscar</button>
-                    <a href="{% url 'register' %}" class="btn btn-dark mt-3 mx-5">Crear usuario</a>
+                    <a href="{% url 'register' %}" class="btn btn-dark mt-3">Crear usuario</a>
                 </div>
             </div>
         </form>
