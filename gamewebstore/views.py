@@ -8,7 +8,7 @@ from django.contrib import messages
 from os import remove, path
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.utils import timezone
 from django.db.models import Q
 
@@ -39,6 +39,7 @@ def index(request):
 
     return render(request,'gamewebstore/index.html', datos)
 
+@permission_required('gamewebstore.add_juego')
 def adminGames(request):
     query = request.GET.get('q')
     if query:
@@ -62,6 +63,7 @@ def adminGames(request):
 
     return render(request,'gamewebstore/adminGames.html', datos)
 
+@permission_required('gamewebstore.add_user')
 def administrador(request):
     query = request.GET.get('q')
     
@@ -157,6 +159,7 @@ def process_payment(request):
     messages.success(request, 'Pago realizado con éxito. Gracias por tu compra.')
     return redirect('cart_detail')
 
+@permission_required('gamewebstore.change_juego')
 def modificarjuego(request, id):
     juego = get_object_or_404(Juego, id=id)
     form = UpdateJuegoForm(instance=juego)
@@ -175,6 +178,7 @@ def modificarjuego(request, id):
 
     return render(request, 'gamewebstore/modificarjuego.html', datos)
 
+@permission_required('gamewebstore.delete_juego')
 def deleteGame(request, id):
     juego=get_object_or_404(Juego, id=id)
     
@@ -190,6 +194,7 @@ def deleteGame(request, id):
 
     return render(request,'gamewebstore/deleteGame.html', datos)
 
+@permission_required('gamewebstore.delete_user')
 def deleteUser(request, id):
     usuario = get_object_or_404(User, id=id)
     
@@ -260,6 +265,7 @@ def register(request):
 
     return render(request,'registration/register.html', datos)
 
+@permission_required('gamewebstore.add_user')
 def editarusuario(request, id):
     usuario = get_object_or_404(User, id=id)
     perfil_usuario = get_object_or_404(Perfil, usuario=usuario)
@@ -299,6 +305,7 @@ def vistaCompras(request):
 
     return render(request,'gamewebstore/vistaCompras.html', datos)
 
+@permission_required('gamewebstore.add_juego')
 def vistaVender(request):
     form=JuegoForm()
 
@@ -314,6 +321,7 @@ def vistaVender(request):
 
     return render(request,'gamewebstore/vistaVender.html', datos)
 
+@permission_required('gamewebstore.view_venta')
 def vistaVentas(request):
     ventas = Venta.objects.all().order_by('-fecha')
 

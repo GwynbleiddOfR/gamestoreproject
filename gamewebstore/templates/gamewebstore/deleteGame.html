@@ -5,67 +5,69 @@
 
     <title>Eliminar juego</title>
 
-    <!-- Editar perfil -->
-    <section class="vh-100">
-        <div class="container py-5 h-100 animate__animated animate__backInLeft">
-            <div class="row justify-content-center align-items-center h-100">
-                <div class="col-12 col-lg-9 col-xl-7">
-                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-                        <div class="card-body p-4 p-md-5 bg-dark">
-                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-light">Eliminar juego</h3>
-                            <div class="alert alert-danger" role="alert">
-                                <h1>¡ATENCIÓN!</h1>
-                                <p><strong>Está a punto de eliminar un juego</strong></p>
-                                <h4>Juego a eliminar:
-                                    <div>
-                                        ID: {{juego.id}}          
-                                    </div> 
-                                    <div>
-                                        Nombre: {{juego.nomb_juego}}
-                                    </div>
-                                </h4>
-                            </div>
+    {% if perms.gamewebstore.delete_juego %}
+        <!-- Editar perfil -->
+        <section class="vh-100">
+            <div class="container py-5 h-100 animate__animated animate__backInLeft">
+                <div class="row justify-content-center align-items-center h-100">
+                    <div class="col-12 col-lg-9 col-xl-7">
+                        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                            <div class="card-body p-4 p-md-5 bg-dark">
+                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-light">Eliminar juego</h3>
+                                <div class="alert alert-danger" role="alert">
+                                    <h1>¡ATENCIÓN!</h1>
+                                    <p><strong>Está a punto de eliminar un juego</strong></p>
+                                    <h4>Juego a eliminar:
+                                        <div>
+                                            ID: {{juego.id}}          
+                                        </div> 
+                                        <div>
+                                            Nombre: {{juego.nomb_juego}}
+                                        </div>
+                                    </h4>
+                                </div>
 
-                            <div>
-                                <input type="button" value="Eliminar juego" data-bs-toggle="modal" data-bs-target="#myModal"
-                                    class="btn btn-danger text-light">
-                                <a href='{% url "adminGames" %}' role='button' class="btn btn-light border">Volver</a>
+                                <div>
+                                    <input type="button" value="Eliminar juego" data-bs-toggle="modal" data-bs-target="#myModal"
+                                        class="btn btn-danger text-light">
+                                    <a href='{% url "adminGames" %}' role='button' class="btn btn-light border">Volver</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- The Modal -->
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        </section>
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Confirmar eliminación</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirmar eliminación</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <p>¿Está seguro que desea eliminar el juego?</p>
+                        <p>ID: {{juego.id}}</p>
+                        <p>NOMBRE: {{juego.nomb_juego}}</p>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger" data-bs-dismiss="modal" value="Confirmar eliminación">
+                        </form>
+                    </div>
+
                 </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <p>¿Está seguro que desea eliminar el juego?</p>
-                    <p>ID: {{juego.id}}</p>
-                    <p>NOMBRE: {{juego.nomb_juego}}</p>
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <form action="" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <input type="submit" class="btn btn-danger" data-bs-dismiss="modal" value="Confirmar eliminación">
-                    </form>
-                </div>
-
             </div>
         </div>
-    </div>
 
-    <script src='{% static "gamewebstore/js/scripts.js" %}'></script>
+        <script src='{% static "gamewebstore/js/scripts.js" %}'></script>
+    {% endif %}
 {% endblock contenido %}

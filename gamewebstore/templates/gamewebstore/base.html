@@ -34,9 +34,11 @@
                     <li class="nav-item">
                         <a class="nav-link active text-white" aria-current="page" href="{% url 'index' %}">Inicio</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="{% url 'administrador' %}">Admin</a>
-                    </li>
+                    {% if perms.gamewebstore.add_juego %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'administrador' %}">Admin</a>
+                        </li>
+                    {% endif %}
                     {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{% url "userProfile" %}">Hola <div class="text-primary">{{user.username}}</div></a>

@@ -4,65 +4,67 @@
 
     <title>Administrar usuarios</title>
 
-    <!-- Lista de usuarios -->
-    <div class="container mt-3">
-        <p class="mb-0 display-5">Opciones de administrador / Usuarios</p>
-        <a href="{% url 'administrador' %}" class="btn btn-dark my-4 mx-1">Administrar usuarios</a>
-        <a href="{% url 'adminGames' %}" class="btn btn-dark my-1 mx-1">Administrar juegos</a>
-        <form class="mt-3">
-            <div class="form-row align-items-center">
-                <div class="col-auto">
-                    <form role="search"> 
-                        <div class="mb-0">
-                            <input type="text" class="form-control" id="adminBuscarUser" placeholder="Buscar usuario... (ID, Nombre, etc)" method="GET" name="q">
-                        </div>
-                    </form>
+    {% if perms.gamewebstore.add_user %}
+        <!-- Lista de usuarios -->
+        <div class="container mt-3">
+            <p class="mb-0 display-5">Opciones de administrador / Usuarios</p>
+            <a href="{% url 'administrador' %}" class="btn btn-dark my-4 mx-1">Administrar usuarios</a>
+            <a href="{% url 'adminGames' %}" class="btn btn-dark my-1 mx-1">Administrar juegos</a>
+            <form class="mt-3">
+                <div class="form-row align-items-center">
+                    <div class="col-auto">
+                        <form role="search"> 
+                            <div class="mb-0">
+                                <input type="text" class="form-control" id="adminBuscarUser" placeholder="Buscar usuario... (ID, Nombre, etc)" method="GET" name="q">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{% url 'register' %}" class="btn btn-dark mt-3">Crear usuario</a>
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <a href="{% url 'register' %}" class="btn btn-dark mt-3">Crear usuario</a>
-                </div>
-            </div>
-        </form>
-        <div class="table-responsive my-3">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th class="bg-dark text-white">ID</th>
-                        <th class="bg-dark text-white">Nombre</th>
-                        <th class="bg-dark text-white">Apellido</th>
-                        <th class="bg-dark text-white">Nombre de usuario</th>
-                        <th class="bg-dark text-white">Correo electrónico</th>
-                        <th class="bg-dark text-white">Número de telefóno</th>
-                        <th class="bg-dark text-white">Ciudad</th>
-                        <th class="bg-dark text-white">Dirección</th>
-                        <th class="bg-dark text-white">Fecha de registro</th>
-                        <th class="bg-dark text-white">Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for p in perfiles %}
+            </form>
+            <div class="table-responsive my-3">
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td>{{p.usuario.id}}</td>
-                            <td>{{p.usuario.first_name}}</td>
-                            <td>{{p.usuario.last_name}}</td>
-                            <td>{{p.usuario.username}}</td>
-                            <td>{{p.usuario.email}}</td>
-                            <td>+569 {{p.telefono}}</td>
-                            <td>{{p.ciudad}}</td>
-                            <td>{{p.direccion}}</td>
-                            <td>{{request.user.date_joined}}</td>
-                            <td class="text-center">
-                                <a href="{% url 'editarusuario' p.usuario.id %}">
-                                    <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Editar</button>
-                                </a>
-                                <a href="{% url 'deleteUser' p.usuario.id %}">
-                                    <button type="button" class="btn btn-danger d-inline-block mx-1 my-1"><i class="bi bi-ban"></i>Eliminar</button>
-                                </a>
-                            </td>
+                            <th class="bg-dark text-white">ID</th>
+                            <th class="bg-dark text-white">Nombre</th>
+                            <th class="bg-dark text-white">Apellido</th>
+                            <th class="bg-dark text-white">Nombre de usuario</th>
+                            <th class="bg-dark text-white">Correo electrónico</th>
+                            <th class="bg-dark text-white">Número de telefóno</th>
+                            <th class="bg-dark text-white">Ciudad</th>
+                            <th class="bg-dark text-white">Dirección</th>
+                            <th class="bg-dark text-white">Fecha de registro</th>
+                            <th class="bg-dark text-white">Acción</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for p in perfiles %}
+                            <tr>
+                                <td>{{p.usuario.id}}</td>
+                                <td>{{p.usuario.first_name}}</td>
+                                <td>{{p.usuario.last_name}}</td>
+                                <td>{{p.usuario.username}}</td>
+                                <td>{{p.usuario.email}}</td>
+                                <td>+569 {{p.telefono}}</td>
+                                <td>{{p.ciudad}}</td>
+                                <td>{{p.direccion}}</td>
+                                <td>{{request.user.date_joined}}</td>
+                                <td class="text-center">
+                                    <a href="{% url 'editarusuario' p.usuario.id %}">
+                                        <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Editar</button>
+                                    </a>
+                                    <a href="{% url 'deleteUser' p.usuario.id %}">
+                                        <button type="button" class="btn btn-danger d-inline-block mx-1 my-1"><i class="bi bi-ban"></i>Eliminar</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock contenido %}
