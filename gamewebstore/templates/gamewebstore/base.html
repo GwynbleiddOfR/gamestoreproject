@@ -11,12 +11,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jersey+10+Charted&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/jpg" href="{% static 'gamewebstore/img/whitewolflogo.jpg' %}"/>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {% block importscss %}
 
     {% endblock importscss %}
-
-    <title>Inicio</title>
 </head>
 
 <body style="background-color: #eee;"">
@@ -50,9 +49,11 @@
                             <a class="nav-link text-white" href="{% url 'login' %}">Iniciar sesión</a>
                         </li>
                     {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="{% url 'register' %}">Registrarse</a>
-                    </li>
+                    {% if not user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'register' %}">Registrarse</a>
+                        </li>
+                    {% endif %}
                     <div class="user-icons d-flex mb-2">
                         <a href="{% url 'cart_detail' %}">
                             <div class="cart"><i class="bi bi-cart-fill" style = "color:white;"></i></div>
