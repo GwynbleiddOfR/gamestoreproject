@@ -48,7 +48,7 @@ class Venta(models.Model):
     cantidad = models.PositiveIntegerField()
     total_venta = models.PositiveIntegerField()
     fecha = models.DateTimeField(auto_now_add=True)
-    estado = models.CharField(max_length=10, choices=ESTADO, default='pendiente')
+    estado = models.CharField(max_length=30, choices=ESTADO, default='EN PREPARACIÓN')
 
     def total_venta(self):
         return self.cantidad * self.juego.precio

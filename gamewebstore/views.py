@@ -3,7 +3,7 @@ from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.models import User
 from .models import Juego, Perfil, Cart, CartItem, Venta
-from .forms import JuegoForm, UpdateJuegoForm, UserForm, PerfilForm, UpdatePerfilForm
+from .forms import JuegoForm, UpdateJuegoForm, UserForm, PerfilForm, UpdatePerfilForm, EstadoVentaForm
 from django.contrib import messages
 from os import remove, path
 from django.conf import settings
@@ -324,9 +324,19 @@ def vistaVender(request):
 @permission_required('gamewebstore.view_venta')
 def vistaVentas(request):
     ventas = Venta.objects.all().order_by('-fecha')
+    if request.method == 'POST':
+        venta_id = request.POST.get('venta_id')
+        venta = get_object_or_404(Venta, id=venta_id)
+        form = EstadoVentaForm(request.POST, instance=venta)
+        if form.is_valid():
+            form.save()
+            return redirect('vistaVentas')  # Redirige a la vista de ventas después de actualizar
+    else:
+        form = EstadoVentaForm()
 
     datos={
-        "ventas":ventas
+        'ventas': ventas,
+        'form': form
     }
 
     return render(request, 'gamewebstore/vistaVentas.html', datos)

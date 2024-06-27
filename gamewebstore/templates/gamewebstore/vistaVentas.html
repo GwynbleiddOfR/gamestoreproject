@@ -35,7 +35,18 @@
                                 <td>$ {{ venta.total_venta }}</td>
                                 <td>{{ venta.usuario.username }}</td>
                                 <td>{{ venta.usuario.email }}</td>
-                                <td>{{ venta.estado }}</td>
+                                <td>
+                                    <form method="post" action="">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="venta_id" value="{{ venta.id }}">
+                                        <select name="estado" onchange="this.form.submit()">
+                                            <option value="EN PREPARACIÓN" {% if venta.estado == 'EN PREPRACIÓN' %}selected{% endif %}>EN PREPARACIÓN</option>
+                                            <option value="PREPARADO" {% if venta.estado == 'PREPARADO' %}selected{% endif %}>PREPARADO</option>
+                                            <option value="ENVIADO" {% if venta.estado == 'ENVIADO' %}selected{% endif %}>ENVIADO</option>
+                                            <option value="ENTREGADO" {% if venta.estado == 'ENTREGADO' %}selected{% endif %}>ENTREGADO</option>
+                                        </select>
+                                    </form>
+                                </td>
                                 <td>{{ venta.fecha }}</td>
                             </tr>
                         {% endfor %}

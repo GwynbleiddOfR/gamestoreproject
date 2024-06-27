@@ -13,7 +13,8 @@ CIUDAD={
 }
 
 ESTADO={
-    ('pendiente', 'Pendiente'),
-    ('completado', 'Completado'),
-    ('enviado', 'Enviado')
+    ('EN PREPARACIÓN', 'EN PREPARACIÓN'),
+    ('PREPARADO', 'PREPARADO'),
+    ('ENVIADO', 'ENVIADO'),
+    ('ENTREGADO', 'ENTREGADO')
 }

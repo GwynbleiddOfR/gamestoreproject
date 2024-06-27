@@ -44,3 +44,9 @@ class UpdateJuegoForm(forms.ModelForm):
     class Meta:
         model = Juego
         fields = ['nomb_juego', 'genero', 'consola', 'precio', 'stock', 'descripcion', 'foto_juego']
+
+# Venta
+class EstadoVentaForm(forms.ModelForm):
+    class Meta:
+        model = Venta
+        fields = ['estado']
