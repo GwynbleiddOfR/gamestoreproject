@@ -297,7 +297,18 @@ def userProfile(request):
 
 @login_required
 def vistaCompras(request):
+    query = request.GET.get('q')
     ventas = Venta.objects.filter(usuario=request.user).order_by('-fecha')
+
+    if query:
+        ventas_filtradas = ventas.filter(
+            Q(juego__nomb_juego__icontains=query) |
+            Q(juego__consola__icontains=query) |
+            Q(cantidad__icontains=query) |
+            Q(estado__icontains=query)
+        )
+        if ventas_filtradas.exists():
+            ventas = ventas_filtradas
 
     datos={
         "ventas":ventas
@@ -327,7 +338,7 @@ def vistaVentas(request):
     ventas = Venta.objects.all().order_by('-fecha')
 
     if query:
-        ventas = ventas.filter(
+        ventas_filtradas = ventas.filter(
             Q(id__icontains=query) |
             Q(juego__id__icontains=query) |
             Q(juego__nomb_juego__icontains=query) |
@@ -338,6 +349,8 @@ def vistaVentas(request):
             Q(estado__icontains=query) |
             Q(fecha__icontains=query)
         )
+        if ventas_filtradas.exists():
+            ventas = ventas_filtradas
 
     if request.method == 'POST':
         venta_id = request.POST.get('venta_id')

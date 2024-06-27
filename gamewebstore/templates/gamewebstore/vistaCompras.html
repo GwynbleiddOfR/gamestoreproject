@@ -8,10 +8,18 @@
         <h2>Mis compras</h2>
         <a href="{% url 'userProfile' %}" class="btn btn-dark my-4 mx-1">Volver a mi perfil</a>
         <div class="table-responsive my-3">
+
+            <form method="get">
+                <div class="input-group mb-3 col-lg-6 col-md-8 col-12">
+                    <input type="text" class="form-control" name="q" placeholder="Buscar compra..." aria-label="Buscar" value="{{ request.GET.q }}">
+                </div>
+            </form>
+
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th class="bg-dark text-white">Juego</th>
+                        <th class="bg-dark text-white">Consola</th>
                         <th class="bg-dark text-white">Precio</th>
                         <th class="bg-dark text-white">Cantidad</th>
                         <th class="bg-dark text-white">Estado del pedido</th>
@@ -21,6 +29,7 @@
                     {% for venta in ventas %}
                         <tr>
                             <td>{{ venta.juego.nomb_juego }}</td>
+                            <td>{{ venta.juego.consola }}</td>
                             <td>$ {{ venta.total_venta }}</td>
                             <td>{{ venta.cantidad }}</td>
                             <td>{{ venta.estado }}</td>
