@@ -8,7 +8,7 @@
             <p class="fw-bold">Información de contacto</p>
             <hr class="mb-1">
             <div class="image d-flex flex-column justify-content-center align-items-center"> 
-                <h3 class="name mt-3">Axel Silva</h3> 
+                <h3 class="name mt-3">{{request.user.first_name}} {{request.user.last_name}}</h3> 
                 <span class="idd fw-bold">@{{user.username}}</span>
                 <span class="id fw-bold">ID: {{user.id}}</span>
                 <div class="d-flex flex-row justify-content-center align-items-center gap-2 mt-2"> 
@@ -43,14 +43,14 @@
                 </div>
                 <div class="d-flex justify-content-between mt-2"> 
                 <a href="{% url 'editarPerfil' %}">
-                    <button type="button" class="btn btn-dark">Editar información</button> 
+                    <button type="button" class="btn btn-dark mx-3">Editar información</button> 
                 </a>
                 <a href="{% url 'vistaCompras' %}">
                     <button type="button" class="btn btn-dark">Mis compras</button>
                 </a>
                     
                 </div>
-                <div class="px-2 rounded mt-4 date"> <span class="join">Se unió el 1 de abril del 2030</span> </div>
+                <div class="px-2 rounded mt-4 date"> <span class="join">Se unió el: {{request.user.date_joined}}</span> </div>
             </div>
         </div>
     </div>

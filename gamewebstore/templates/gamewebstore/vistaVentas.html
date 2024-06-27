@@ -16,6 +16,7 @@
                         <th class="bg-dark text-white">Cantidad vendida</th>
                         <th class="bg-dark text-white">Total venta</th>
                         <th class="bg-dark text-white">Usuario</th>
+                        <th class="bg-dark text-white">Email usuario</th>
                         <th class="bg-dark text-white">Estado</th>
                         <th class="bg-dark text-white">Fecha venta</th>
                     </tr>
@@ -30,6 +31,7 @@
                             <td>{{ venta.cantidad }}</td>
                             <td>$ {{ venta.total_venta }}</td>
                             <td>{{ venta.usuario.username }}</td>
+                            <td>{{ venta.usuario.email }}</td>
                             <td>{{ venta.estado }}</td>
                             <td>{{ venta.fecha }}</td>
                         </tr>

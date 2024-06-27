@@ -32,6 +32,7 @@
                         <th class="bg-dark text-white">Número de telefóno</th>
                         <th class="bg-dark text-white">Ciudad</th>
                         <th class="bg-dark text-white">Dirección</th>
+                        <th class="bg-dark text-white">Fecha de registro</th>
                         <th class="bg-dark text-white">Acción</th>
                     </tr>
                 </thead>
@@ -39,13 +40,14 @@
                     {% for p in perfiles %}
                         <tr>
                             <td>{{p.usuario.id}}</td>
-                            <td>Axel</td>
-                            <td>Silva</td>
+                            <td>{{p.usuario.first_name}}</td>
+                            <td>{{p.usuario.last_name}}</td>
                             <td>{{p.usuario.username}}</td>
-                            <td>pagalosbarrosluco@gmail.com</td>
+                            <td>{{p.usuario.email}}</td>
                             <td>+569 {{p.telefono}}</td>
                             <td>{{p.ciudad}}</td>
                             <td>{{p.direccion}}</td>
+                            <td>{{request.user.date_joined}}</td>
                             <td class="text-center">
                                 <a href="{% url 'editarusuario' p.usuario.id %}">
                                     <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Editar</button>
