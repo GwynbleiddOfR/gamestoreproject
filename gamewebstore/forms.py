@@ -9,6 +9,16 @@ class UserForm(UserCreationForm):
     class Meta:
         model=User
         fields=['username', 'first_name', 'last_name', 'email','password1','password2']
+        widgets = {
+            'password1': forms.PasswordInput(),
+            'password2': forms.PasswordInput(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+        self.fields['email'].required = True
 
 class PerfilForm(forms.ModelForm):
 
