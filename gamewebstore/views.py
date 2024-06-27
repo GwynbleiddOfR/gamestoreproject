@@ -323,7 +323,22 @@ def vistaVender(request):
 
 @permission_required('gamewebstore.view_venta')
 def vistaVentas(request):
+    query = request.GET.get('q')
     ventas = Venta.objects.all().order_by('-fecha')
+
+    if query:
+        ventas = ventas.filter(
+            Q(id__icontains=query) |
+            Q(juego__id__icontains=query) |
+            Q(juego__nomb_juego__icontains=query) |
+            Q(juego__consola__icontains=query) |
+            Q(cantidad__icontains=query) |
+            Q(usuario__username__icontains=query) |
+            Q(usuario__email__icontains=query) |
+            Q(estado__icontains=query) |
+            Q(fecha__icontains=query)
+        )
+
     if request.method == 'POST':
         venta_id = request.POST.get('venta_id')
         venta = get_object_or_404(Venta, id=venta_id)

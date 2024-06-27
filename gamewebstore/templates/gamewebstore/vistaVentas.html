@@ -8,6 +8,13 @@
         <div class="container mt-3">
             <h2>Ventas</h2>
             <a href="{% url 'adminGames' %}" class="btn btn-dark my-4 mx-1">Volver al admin</a>
+
+            <form method="get">
+                <div class="input-group mb-3 col-lg-6 col-md-8 col-12">
+                    <input type="text" class="form-control" name="q" placeholder="Buscar venta..." aria-label="Buscar" value="{{ request.GET.q }}">
+                </div>
+            </form>
+
             <div class="table-responsive my-3">
                 <table class="table table-bordered">
                     <thead>
