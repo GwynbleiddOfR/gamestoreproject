@@ -39,9 +39,16 @@ def index(request):
     return render(request,'gamewebstore/index.html', datos)
 
 def adminGames(request):
-    juegos=Juego.objects.all()
-    datos={
-        "juegos":juegos
+    query = request.GET.get('q')
+    if query:
+        juegos = Juego.objects.filter(nomb_juego__icontains=query)
+        if not juegos.exists():
+            juegos = Juego.objects.all()
+    else:
+        juegos = Juego.objects.all()
+    
+    datos = {
+        "juegos": juegos
     }
 
     return render(request,'gamewebstore/adminGames.html', datos)
