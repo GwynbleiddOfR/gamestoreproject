@@ -145,7 +145,7 @@ def process_payment(request):
                 usuario=request.user,
                 juego=juego,
                 cantidad=item.cantidad,
-                estado='pendiente',  # Estado inicial de la venta
+                estado='EN PREPARACIÓN',
                 fecha=timezone.now()
             )
         
@@ -358,7 +358,7 @@ def vistaVentas(request):
         form = EstadoVentaForm(request.POST, instance=venta)
         if form.is_valid():
             form.save()
-            return redirect('vistaVentas')  # Redirige a la vista de ventas después de actualizar
+            return redirect('vistaVentas')
     else:
         form = EstadoVentaForm()
 

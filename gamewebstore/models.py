@@ -7,9 +7,9 @@ from django.conf import settings
 # Create your models here.
 class Perfil(models.Model):
     usuario=models.OneToOneField(User, related_name='usuario', on_delete=models.CASCADE)
-    telefono=models.CharField(max_length=9, null=False)
-    ciudad=models.CharField(max_length=15, choices=CIUDAD, null=False)
-    direccion=models.CharField(max_length=200, null=False)
+    telefono=models.CharField(max_length=9, null=True)
+    ciudad=models.CharField(max_length=15, choices=CIUDAD, null=True)
+    direccion=models.CharField(max_length=200, null=True)
 
 class Juego(models.Model):
     nomb_juego=models.CharField(max_length=100, null=False, verbose_name="Nombre")
