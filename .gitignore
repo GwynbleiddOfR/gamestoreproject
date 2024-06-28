@@ -1,5 +1,4 @@
 gamewebstore/__pycache__/
 sitio/__pycache__/
 gamewebstore/migrations/__pycache__
-gamewebstore/media/juegos
 db.sqlite3
