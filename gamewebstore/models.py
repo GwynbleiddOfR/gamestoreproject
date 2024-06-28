@@ -43,7 +43,7 @@ class Cart(models.Model):
     
 # Ventas
 class Venta(models.Model):
-    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Usuario")
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Usuario")
     juego = models.ForeignKey(Juego, on_delete=models.CASCADE, verbose_name="Juego")
     cantidad = models.PositiveIntegerField()
     total_venta = models.PositiveIntegerField()
