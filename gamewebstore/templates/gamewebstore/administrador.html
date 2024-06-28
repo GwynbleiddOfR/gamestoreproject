@@ -28,7 +28,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th class="bg-dark text-white">ID</th>
+                            {% comment %} <th class="bg-dark text-white">ID</th> {% endcomment %}
                             <th class="bg-dark text-white">Nombre</th>
                             <th class="bg-dark text-white">Apellido</th>
                             <th class="bg-dark text-white">Nombre de usuario</th>
@@ -41,26 +41,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for p in perfiles %}
+                 
+                        {% for usuario in usuarios %}
                             <tr>
-                                <td>{{p.usuario.id}}</td>
-                                <td>{{p.usuario.first_name}}</td>
-                                <td>{{p.usuario.last_name}}</td>
-                                <td>{{p.usuario.username}}</td>
-                                <td>{{p.usuario.email}}</td>
-                                <td>+569 {{p.telefono}}</td>
-                                <td>{{p.ciudad}}</td>
-                                <td>{{p.direccion}}</td>
-                                <td>{{request.user.date_joined}}</td>
-                                <td class="text-center">
-                                    <a href="{% url 'editarusuario' p.usuario.id %}">
-                                        <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Editar</button>
-                                    </a>
-                                    <a href="{% url 'deleteUser' p.usuario.id %}">
-                                        <button type="button" class="btn btn-danger d-inline-block mx-1 my-1"><i class="bi bi-ban"></i>Eliminar</button>
-                                    </a>
-                                </td>
-                            </tr>
+                                {% comment %} <td>{{ usuario.id }}</td> {% endcomment %}
+                                <td>{{ usuario.first_name }}</td>
+                                <td>{{ usuario.last_name }}</td>
+                                <td>{{ usuario.username }}</td>
+                                <td>{{ usuario.email }}</td>
+                                   
+                                        <td>+569 {{ usuario.telefono }}</td>
+                                        <td>{{ usuario.ciudad }}</td>
+                                        <td>{{ usuario.direccion }}</td>
+                                 
+                                    <td>{{ usuario.date_joined }}</td>
+                                    <td class="text-center">
+                                        {% comment %} <a href="{% url 'editarusuario' p.usuario.id %}">
+                                            <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Editar</button>
+                                        </a>
+                                        <a href="{% url 'deleteUser' p.usuario.id %}">
+                                            <button type="button" class="btn btn-danger d-inline-block mx-1 my-1"><i class="bi bi-ban"></i>Eliminar</button>
+                                        </a> {% endcomment %}
+                                    </td>
+                                </tr>
+                    
                         {% endfor %}
                     </tbody>
                 </table>

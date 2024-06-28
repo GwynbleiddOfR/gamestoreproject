@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils import timezone
 from django.db.models import Q
+from .viewmodel import MostrarDatosUsuarios
 
 # Create your views here.
 def cerrar_sesion(request):
@@ -65,27 +66,37 @@ def adminGames(request):
 
 @permission_required('gamewebstore.add_user')
 def administrador(request):
-    query = request.GET.get('q')
+    #usuarios = User.objects.all()
+    perfiles = Perfil.objects.all()
     
-    if query:
-        perfiles = Perfil.objects.filter(
-            Q(usuario__id__icontains=query) |
-            Q(usuario__username__icontains=query) |
-            Q(usuario__first_name__icontains=query) |
-            Q(usuario__last_name__icontains=query) |
-            Q(usuario__email__icontains=query) |
-            Q(telefono__icontains=query) |
-            Q(ciudad__icontains=query) |
-            Q(direccion__icontains=query)
-        )
-        if not perfiles.exists():
-            perfiles = Perfil.objects.all()
-    else:
-        perfiles = Perfil.objects.all()
+    print("***************************")
+    #print(usuarios)
+    usuarios_view = []
+    for per in perfiles:
+        usrview = MostrarDatosUsuarios()
+        #usrview.usr_id=per.id
+        usrview.username=per.usuario.username
+        usrview.first_name = per.usuario.first_name
+        usrview.last_name =per.usuario.last_name
+        usrview.email=per.usuario.email
+        usrview.date_joined=per.usuario.date_joined
+        usrview.ciudad=per.ciudad
+        usrview.direccion=per.direccion
+        usrview.telefono=per.telefono
+        #print(usrview)
+        usuarios_view.append(usrview)
     
-    datos = {
-        "perfiles": perfiles
+    
+    datos={
+        "usuarios":usuarios_view
+        
     }
+        
+  
+  
+   
+    
+
     return render(request,'gamewebstore/administrador.html', datos)
 
 def carrito(request):
@@ -255,8 +266,12 @@ def register(request):
     if request.method=="POST":
         form=UserForm(data=request.POST)
         if form.is_valid():
-            form.save()
 
+            form.save()
+            usuarionuevo=get_object_or_404(User,username=form.cleaned_data["username"])
+            perfil=Perfil()
+            perfil.usuario=usuarionuevo
+            perfil.save()
             return redirect(to="login")
 
     datos={
