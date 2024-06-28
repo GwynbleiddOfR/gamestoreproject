@@ -42,7 +42,7 @@
                 <div class="collection-list mt-4 row">
                     {% for j in juegos %}
                         <div class="col-md-6 col-lg-4 col-xl-3 p-2">
-                            <div class="collection-img position-relative">
+                            <div class="collection-img position-relative mt-3">
                                 
                                 <a href="{% url 'descriptionGame' j.id %}"><img src="{{j.foto_juego.url}}" class="w-100"></a>
                             </div>
@@ -64,7 +64,7 @@
                         <div class="text-center m-4">
                             <p class="fw-bold">&#129309; &#129309; &#129309; NO HAY MAS JUEGUITOS PERO MIENTRAS MIRA GATITOS &#129309; &#129309; &#129309;</p>
                             <a href="{% url 'gatoRandom' %}">
-                                <button class="btn btn-sucess">RANDOM CATSSSSSSSSSS!!!!!!!!!!!</button>
+                                <button class="btn btn-sucess">RANDOM CATS!</button>
                             </a>
                         </div>
                     </div>
