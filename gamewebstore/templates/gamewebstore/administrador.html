@@ -28,7 +28,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            {% comment %} <th class="bg-dark text-white">ID</th> {% endcomment %}
+                            <th class="bg-dark text-white">ID</th>
                             <th class="bg-dark text-white">Nombre</th>
                             <th class="bg-dark text-white">Apellido</th>
                             <th class="bg-dark text-white">Nombre de usuario</th>
@@ -44,7 +44,7 @@
                  
                         {% for usuario in usuarios %}
                             <tr>
-                                {% comment %} <td>{{ usuario.id }}</td> {% endcomment %}
+                                <td>{{ usuario.id_usuario }}</td>
                                 <td>{{ usuario.first_name }}</td>
                                 <td>{{ usuario.last_name }}</td>
                                 <td>{{ usuario.username }}</td>
@@ -56,12 +56,12 @@
                                  
                                     <td>{{ usuario.date_joined }}</td>
                                     <td class="text-center">
-                                        {% comment %} <a href="{% url 'editarusuario' p.usuario.id %}">
+                                        <a href="{% url 'editarusuario' usuario.id_usuario %}">
                                             <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Editar</button>
                                         </a>
-                                        <a href="{% url 'deleteUser' p.usuario.id %}">
+                                        <a href="{% url 'deleteUser' usuario.id_usuario %}">
                                             <button type="button" class="btn btn-danger d-inline-block mx-1 my-1"><i class="bi bi-ban"></i>Eliminar</button>
-                                        </a> {% endcomment %}
+                                        </a>
                                     </td>
                                 </tr>
                     

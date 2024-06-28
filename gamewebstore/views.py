@@ -74,7 +74,12 @@ def administrador(request):
     usuarios_view = []
     for per in perfiles:
         usrview = MostrarDatosUsuarios()
-        #usrview.usr_id=per.id
+        nombreu=per.usuario.username
+        useruser=User.objects.get(username=nombreu)
+        idql=str(useruser.id)
+
+        print(idql)
+        usrview.id_usuario=idql
         usrview.username=per.usuario.username
         usrview.first_name = per.usuario.first_name
         usrview.last_name =per.usuario.last_name
@@ -86,17 +91,10 @@ def administrador(request):
         #print(usrview)
         usuarios_view.append(usrview)
     
-    
     datos={
         "usuarios":usuarios_view
         
     }
-        
-  
-  
-   
-    
-
     return render(request,'gamewebstore/administrador.html', datos)
 
 def carrito(request):
