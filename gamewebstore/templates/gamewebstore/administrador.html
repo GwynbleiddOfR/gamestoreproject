@@ -41,30 +41,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                 
                         {% for usuario in usuarios %}
                             <tr>
                                 <td>{{ usuario.id_usuario }}</td>
                                 <td>{{ usuario.first_name }}</td>
                                 <td>{{ usuario.last_name }}</td>
-                                <td>{{ usuario.username }}</td>
+                                <td><a href="{% url 'userProfile' usuario.username %}">{{ usuario.username }}</a></td>
                                 <td>{{ usuario.email }}</td>
-                                   
-                                        <td>+569 {{ usuario.telefono }}</td>
-                                        <td>{{ usuario.ciudad }}</td>
-                                        <td>{{ usuario.direccion }}</td>
-                                 
-                                    <td>{{ usuario.date_joined }}</td>
-                                    <td class="text-center">
-                                        <a href="{% url 'editarusuario' usuario.id_usuario %}">
-                                            <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Editar</button>
-                                        </a>
-                                        <a href="{% url 'deleteUser' usuario.id_usuario %}">
-                                            <button type="button" class="btn btn-danger d-inline-block mx-1 my-1"><i class="bi bi-ban"></i>Eliminar</button>
-                                        </a>
-                                    </td>
-                                </tr>
-                    
+                                <td>+569 {{ usuario.telefono }}</td>
+                                <td>{{ usuario.ciudad }}</td>
+                                <td>{{ usuario.direccion }}</td>
+                                <td>{{ usuario.date_joined }}</td>
+                                <td class="text-center">
+                                    <a href="{% url 'editarusuario' usuario.id_usuario %}">
+                                        <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Editar</button>
+                                    </a>
+                                    <a href="{% url 'deleteUser' usuario.id_usuario %}">
+                                        <button type="button" class="btn btn-danger d-inline-block mx-1 my-1"><i class="bi bi-ban"></i>Eliminar</button>
+                                    </a>
+                                </td>
+                            </tr>
                         {% endfor %}
                     </tbody>
                 </table>

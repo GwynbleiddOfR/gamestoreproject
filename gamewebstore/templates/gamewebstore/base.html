@@ -41,7 +41,7 @@
                     {% endif %}
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url "userProfile" %}">Hola <div class="text-primary">{{user.username}}</div></a>
+                            <a class="nav-link text-white" href="{% url "userProfile" user.username %}">Hola <div class="text-primary">{{user.username}}</div></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{% url 'cerrar_sesion' %}">Cerrar sesión</a>

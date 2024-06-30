@@ -298,12 +298,14 @@ def editarusuario(request, id):
 
     return render(request,'gamewebstore/editarusuario.html', datos)
 
-def userProfile(request):
+def userProfile(request, username):
+    user = get_object_or_404(User, username=username)
     usr = request.user
     perfil_usuario, created = Perfil.objects.get_or_create(usuario=usr)
     
     datos = {
-        'perfil': perfil_usuario
+        'perfil': perfil_usuario,
+        'user': user
     }
 
     return render(request,'gamewebstore/userProfile.html', datos)
