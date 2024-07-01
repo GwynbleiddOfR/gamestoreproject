@@ -46,11 +46,12 @@
                                     <form method="post" action="">
                                         {% csrf_token %}
                                         <input type="hidden" name="venta_id" value="{{ venta.id }}">
-                                        <select name="estado" onchange="this.form.submit()">
+                                        <select name="estado" onchange="this.form.submit()"> 
                                             <option value="EN PREPARACIÓN" {% if venta.estado == 'EN PREPRACIÓN' %}selected{% endif %}>EN PREPARACIÓN</option>
                                             <option value="PREPARADO" {% if venta.estado == 'PREPARADO' %}selected{% endif %}>PREPARADO</option>
                                             <option value="ENVIADO" {% if venta.estado == 'ENVIADO' %}selected{% endif %}>ENVIADO</option>
                                             <option value="ENTREGADO" {% if venta.estado == 'ENTREGADO' %}selected{% endif %}>ENTREGADO</option>
+                                            <option value="CANCELADO" {% if venta.estado == 'CANCELADO' %}selected{% endif %}>CANCELADO</option>
                                         </select>
                                     </form>
                                 </td>

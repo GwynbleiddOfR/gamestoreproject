@@ -18,6 +18,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
+                        <th class="bg-dark text-white">Imagen</th>
                         <th class="bg-dark text-white">Juego</th>
                         <th class="bg-dark text-white">Consola</th>
                         <th class="bg-dark text-white">Precio</th>
@@ -28,6 +29,7 @@
                 <tbody>
                     {% for venta in ventas %}
                         <tr>
+                            <td class="text-center"> <img src="{{ venta.juego.foto_juego.url }}" style="width: 65px;" alt="juego-imagen"></td>
                             <td>{{ venta.juego.nomb_juego }}</td>
                             <td>{{ venta.juego.consola }}</td>
                             <td>$ {{ venta.total_venta }}</td>
