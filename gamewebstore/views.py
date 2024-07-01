@@ -26,6 +26,7 @@ def index(request):
     if query:
         juegos = Juego.objects.filter(nomb_juego__icontains=query)
         if not juegos.exists():
+            messages.error(request, 'Lo sentimos, el juego que buscas no se encuentra en nuestro catálogo.')
             juegos = Juego.objects.all()
     else:
         juegos = Juego.objects.all()
@@ -55,6 +56,7 @@ def adminGames(request):
             Q(descripcion__icontains=query)
         )
         if not juegos.exists():
+            messages.error(request, 'Ningún juego coincide con la búsqueda.')
             juegos = Juego.objects.all()
     else:
         juegos = Juego.objects.all()
@@ -83,6 +85,9 @@ def administrador(request):
             Q(direccion__icontains=query) |
             Q(telefono__icontains=query)
         )
+    if not perfiles.exists():
+        messages.error(request, 'Ningún usuario coincide con la búsqueda.')
+        perfiles = Perfil.objects.all()
 
     usuarios_view = []
     for per in perfiles:
