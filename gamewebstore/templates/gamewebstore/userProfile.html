@@ -19,7 +19,9 @@
             <div class="image d-flex flex-column justify-content-center align-items-center"> 
                 <h3 class="name mt-3">{{request.user.first_name}} {{request.user.last_name}}</h3> 
                 <span class="idd fw-bold">@{{user.username}}</span>
-                <span class="id fw-bold">ID: {{user.id}}</span>
+                {% if perms.gamewebstore.add_user %}
+                    <span class="id fw-bold">ID: {{user.id}}</span>
+                {% endif %}
                 <div class="d-flex flex-row justify-content-center align-items-center gap-2 mt-2"> 
                     <span class="ciudad" id="mail">Ciudad: {{perfil.ciudad}}</span>
                 </div>
