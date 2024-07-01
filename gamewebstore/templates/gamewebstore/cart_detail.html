@@ -14,6 +14,7 @@
         <table class="table table-bordered">
         <thead>
             <tr>
+                <th class="bg-dark text-white">Imagen</th>
                 <th class="bg-dark text-white">Juego</th>
                 <th class="bg-dark text-white">Cantidad</th>
                 <th class="bg-dark text-white">Stock disponible</th>
@@ -25,6 +26,7 @@
         <tbody>
             {% for item in cart.items.all %}
             <tr>
+                <td class="text-center"> <img src="{{ item.juego.foto_juego.url }}" style="width: 65px;" alt="juego-imagen"></td>
                 <td>{{ item.juego.nomb_juego }}</td>
                 <td>
                     <form method="post" action="{% url 'update_cart_item' item.id %}">
@@ -44,7 +46,45 @@
         </tbody>
     </table>
     <h3 class="mt-5">Total: $ {{ cart.total }}</h3>
-    <a href="{% url 'process_payment' %}">
-        <button type="button" class="btn btn-success mt-1">Pagar $$</button>
-    </a>
+    <button type="button" class="btn btn-success mt-1" data-bs-toggle="modal" data-bs-target="#detalleCompraModal">
+        Pagar $$
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="detalleCompraModal" tabindex="-1" aria-labelledby="detalleCompraModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detalleCompraModalLabel">Confirmar compra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Juego</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart.items.all %}
+                            <tr>
+                                <td>{{ item.juego.nomb_juego }}</td>
+                                <td>{{ item.cantidad }}</td>
+                                <td>${{ item.subtotal }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <h3 class="mt-3">Total: $ {{ cart.total }}</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                    <a href="{% url 'process_payment' %}" class="btn btn-success">Confirmar compra</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock contenido %}

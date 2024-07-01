@@ -24,6 +24,7 @@
                         <th class="bg-dark text-white">Precio</th>
                         <th class="bg-dark text-white">Cantidad</th>
                         <th class="bg-dark text-white">Estado del pedido</th>
+                        <th class="bg-dark text-white">Fecha de compra</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,7 @@
                             <td>$ {{ venta.total_venta }}</td>
                             <td>{{ venta.cantidad }}</td>
                             <td>{{ venta.estado }}</td>
+                            <td>{{ venta.fecha }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
