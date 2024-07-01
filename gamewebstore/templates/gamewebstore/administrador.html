@@ -31,9 +31,9 @@
                             <th class="bg-dark text-white">ID</th>
                             <th class="bg-dark text-white">Nombre</th>
                             <th class="bg-dark text-white">Apellido</th>
-                            <th class="bg-dark text-white">Nombre de usuario</th>
+                            <th class="bg-dark text-white">Usuario</th>
                             <th class="bg-dark text-white">Correo electrónico</th>
-                            <th class="bg-dark text-white">Número de telefóno</th>
+                            <th class="bg-dark text-white">Teléfono</th>
                             <th class="bg-dark text-white">Ciudad</th>
                             <th class="bg-dark text-white">Dirección</th>
                             <th class="bg-dark text-white">Fecha de registro</th>
@@ -48,16 +48,19 @@
                                 <td>{{ usuario.last_name }}</td>
                                 <td><a href="{% url 'userProfile' usuario.username %}">{{ usuario.username }}</a></td>
                                 <td>{{ usuario.email }}</td>
-                                <td>+569 {{ usuario.telefono }}</td>
+                                <td>+569{{ usuario.telefono }}</td>
                                 <td>{{ usuario.ciudad }}</td>
                                 <td>{{ usuario.direccion }}</td>
                                 <td>{{ usuario.date_joined }}</td>
                                 <td class="text-center">
-                                    <a href="{% url 'editarusuario' usuario.id_usuario %}">
-                                        <button type="button" class="btn btn-success d-inline-block mx-1 my-1"><i class="bi bi-bandaid"></i>Editar</button>
+                                    <a class="btn btn-primary d-inline-block mx-1 my-1" href="{% url 'userProfile' usuario.username %}">
+                                        Ver perfil
                                     </a>
-                                    <a href="{% url 'deleteUser' usuario.id_usuario %}">
-                                        <button type="button" class="btn btn-danger d-inline-block mx-1 my-1"><i class="bi bi-ban"></i>Eliminar</button>
+                                    <a class="btn btn-success d-inline-block mx-1 my-1" href="{% url 'editarusuario' usuario.id_usuario %}">
+                                        <i class="bi bi-bandaid"></i> Editar
+                                    </a>
+                                    <a class="btn btn-danger d-inline-block mx-1 my-1" href="{% url 'deleteUser' usuario.id_usuario %}">
+                                        <i class="bi bi-ban"></i> Eliminar
                                     </a>
                                 </td>
                             </tr>

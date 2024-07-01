@@ -10,6 +10,7 @@ class Perfil(models.Model):
     telefono=models.CharField(max_length=9, null=True)
     ciudad=models.CharField(max_length=15, choices=CIUDAD, null=True)
     direccion=models.CharField(max_length=200, null=True)
+    perfil_completo=models.BooleanField(default=False)
 
 class Juego(models.Model):
     nomb_juego=models.CharField(max_length=100, null=False, verbose_name="Nombre")

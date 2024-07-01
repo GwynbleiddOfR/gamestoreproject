@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.utils import timezone
 from django.db.models import Q
 from .viewmodel import MostrarDatosUsuarios
+from .decorators import perfil_completo_requerido
 
 # Create your views here.
 def cerrar_sesion(request):
@@ -101,6 +102,7 @@ def carrito(request):
     return render(request,'gamewebstore/carrito.html')
 
 @login_required
+@perfil_completo_requerido
 def add_to_cart(request, juego_id):
     juego = get_object_or_404(Juego, id=juego_id)
     cart, created = Cart.objects.get_or_create(usuario=request.user)
@@ -237,9 +239,10 @@ def editarPerfil(request):
         if form.is_valid():
             perfil = form.save(commit=False)
             perfil.usuario = usr
+            perfil.perfil_completo = True
             perfil.save()
             messages.warning(request,"Perfil modificado")
-            return redirect(to="userProfile")
+            return redirect(to="userProfile", username=request.user.username)
     else:
         if perfil_existente:
             form = PerfilForm(instance=perfil_existente)
@@ -298,10 +301,10 @@ def editarusuario(request, id):
 
     return render(request,'gamewebstore/editarusuario.html', datos)
 
+@login_required
 def userProfile(request, username):
     user = get_object_or_404(User, username=username)
-    usr = request.user
-    perfil_usuario, created = Perfil.objects.get_or_create(usuario=usr)
+    perfil_usuario, created = Perfil.objects.get_or_create(usuario=user)
     
     datos = {
         'perfil': perfil_usuario,
