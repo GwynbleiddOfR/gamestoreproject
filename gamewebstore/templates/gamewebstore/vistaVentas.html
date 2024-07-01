@@ -2,11 +2,11 @@
 {% load static %}
 {% block contenido %}
 
-    <title>Ventas</title>
+    <title>Pedidos</title>
 
     {% if perms.gamewebstore.view_venta %}
         <div class="container mt-3">
-            <h2>Ventas</h2>
+            <h2>Pedidos</h2>
             <a href="{% url 'adminGames' %}" class="btn btn-dark my-4 mx-1">Volver al admin</a>
 
             <form method="get">
@@ -19,7 +19,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th class="bg-dark text-white">ID venta</th>
+                            <th class="bg-dark text-white">ID pedido</th>
                             <th class="bg-dark text-white">ID juego</th>
                             <th class="bg-dark text-white">Nombre juego</th>
                             <th class="bg-dark text-white">Consola</th>
@@ -29,6 +29,7 @@
                             <th class="bg-dark text-white">Email usuario</th>
                             <th class="bg-dark text-white">Estado</th>
                             <th class="bg-dark text-white">Fecha venta</th>
+                            <th class="bg-dark text-white">Acción</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,6 +57,11 @@
                                     </form>
                                 </td>
                                 <td>{{ venta.fecha }}</td>
+                                {% if venta.usuario %}
+                                <td><a href="{% url 'userProfile' venta.usuario.username %}" class="btn btn-primary">Ver perfil</a></td>
+                                {% else %}
+                                <td>N/A</td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                     </tbody>

@@ -5,6 +5,12 @@
     <title>Inicio</title>
 
     <!-- Main -->
+    {% if perms.gamewebstore.add_juego %}
+        <div class="container mt-3">
+            <a href="{% url 'vistaVender' %}" class="btn btn-dark my-4 mx-1">Realizar venta</a>
+        </div>
+    {% endif %}
+
     <section id="collection" class="p-5">
         <div class="container">
             <div class="title text-center">

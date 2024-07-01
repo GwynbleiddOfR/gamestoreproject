@@ -4,6 +4,12 @@
 
     <title>{{juego.nomb_juego}}</title>
 
+    {% if perms.gamewebstore.add_juego %}
+        <div class="container mt-3">
+            <a href="{% url 'adminGames' %}" class="btn btn-dark my-4 mx-1">Volver al panel de administrador</a>
+        </div>
+    {% endif %}
+
     <section class="py-5" style="background-color: #eee;">
         <div class="container">
             <div class="row gx-5">

@@ -5,6 +5,13 @@
     <title>Mi perfil</title>
 
     <!-- Perfil -->
+    {% if perms.gamewebstore.add_user %}
+        <div class="container mt-3">
+            <a href="{% url 'administrador' %}" class="btn btn-dark my-4 mx-1">Administrar usuarios</a>
+            <a href="{% url 'vistaVentas' %}" class="btn btn-dark my-4 mx-1">Ver ventas</a>
+        </div>
+    {% endif %}
+
     <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
         <div class="card p-5">
             <p class="fw-bold">Información de contacto</p>
