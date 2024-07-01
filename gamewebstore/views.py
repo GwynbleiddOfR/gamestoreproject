@@ -67,11 +67,23 @@ def adminGames(request):
 
 @permission_required('gamewebstore.add_user')
 def administrador(request):
+    query = request.GET.get('q')
     #usuarios = User.objects.all()
     perfiles = Perfil.objects.all()
     
     print("***************************")
     #print(usuarios)
+    if query:
+        perfiles = perfiles.filter(
+            Q(usuario__username__icontains=query) |
+            Q(usuario__first_name__icontains=query) |
+            Q(usuario__last_name__icontains=query) |
+            Q(usuario__email__icontains=query) |
+            Q(ciudad__icontains=query) |
+            Q(direccion__icontains=query) |
+            Q(telefono__icontains=query)
+        )
+
     usuarios_view = []
     for per in perfiles:
         usrview = MostrarDatosUsuarios()
