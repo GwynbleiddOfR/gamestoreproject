@@ -48,9 +48,9 @@
                                 <td>{{ usuario.last_name }}</td>
                                 <td><a href="{% url 'userProfile' usuario.username %}">{{ usuario.username }}</a></td>
                                 <td>{{ usuario.email }}</td>
-                                <td>+569{{ usuario.telefono }}</td>
-                                <td>{{ usuario.ciudad }}</td>
-                                <td>{{ usuario.direccion }}</td>
+                                <td>{% if usuario.telefono %}+569{{ usuario.telefono }}{% else %}Pendiente{% endif %}</td>
+                                <td>{% if usuario.ciudad %}{{ usuario.ciudad }}{% else %}Pendiente{% endif %}</td>
+                                <td>{% if usuario.direccion %}{{ usuario.direccion }}{% else %}Pendiente{% endif %}</td>
                                 <td>{{ usuario.date_joined }}</td>
                                 <td class="text-center">
                                     <a class="btn btn-primary d-inline-block mx-1 my-1" href="{% url 'userProfile' usuario.username %}">
