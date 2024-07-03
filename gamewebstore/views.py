@@ -106,6 +106,7 @@ def administrador(request):
         usrview.ciudad=per.ciudad
         usrview.direccion=per.direccion
         usrview.telefono=per.telefono
+        usrview.is_active=per.usuario.is_active
         #print(usrview)
         usuarios_view.append(usrview)
     
@@ -114,6 +115,25 @@ def administrador(request):
         
     }
     return render(request,'gamewebstore/administrador.html', datos)
+
+def crearusuario(request):
+    form=UserForm()
+
+    if request.method=="POST":
+        form=UserForm(data=request.POST)
+        if form.is_valid():
+
+            form.save()
+            usuarionuevo=get_object_or_404(User,username=form.cleaned_data["username"])
+            perfil=Perfil()
+            perfil.usuario=usuarionuevo
+            perfil.save()
+            return redirect(to="administrador")
+
+    datos={
+        "form":form
+    }
+    return render(request, 'gamewebstore/crearusuario.html', datos)
 
 def carrito(request):
     return render(request,'gamewebstore/carrito.html')
@@ -226,10 +246,14 @@ def deleteGame(request, id):
 def deleteUser(request, id):
     usuario = get_object_or_404(User, id=id)
     
-    if request.method == "POST":
-        Perfil.objects.filter(usuario=usuario).delete()
-        usuario.delete()
-        messages.warning(request, "Usuario eliminado")
+    try:
+        if request.method == "POST":
+            #Perfil.objects.filter(usuario=usuario).delete()
+            usuario.delete()
+            messages.warning(request, "Usuario eliminado")
+            return redirect(to="administrador")
+    except Exception:
+        messages.error(request, "No se puede eliminar porque ya tiene un pedido")
         return redirect(to="administrador")
         
     datos = {
@@ -304,19 +328,19 @@ def editarusuario(request, id):
     perfil_usuario = get_object_or_404(Perfil, usuario=usuario)
     
     if request.method == "POST":
-        form = UpdatePerfilForm(request.POST, instance=perfil_usuario)
+        form = UpdatePerfilForm(request.POST, instance=perfil_usuario, user=usuario)
         if form.is_valid():
             form.save()
             messages.warning(request, "Usuario modificado")
             return redirect('administrador')
     else:
-        form = UpdatePerfilForm(instance=perfil_usuario)
+        form = UpdatePerfilForm(instance=perfil_usuario, user=usuario)
 
     datos = {
         'form': form
     }
 
-    return render(request,'gamewebstore/editarusuario.html', datos)
+    return render(request, 'gamewebstore/editarusuario.html', datos)
 
 @login_required
 def userProfile(request, username):

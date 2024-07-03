@@ -8,3 +8,4 @@ class MostrarDatosUsuarios():
     ciudad=""
     direccion=""
     date_joined=""
+    is_active=""

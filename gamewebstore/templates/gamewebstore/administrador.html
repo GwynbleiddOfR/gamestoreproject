@@ -20,7 +20,7 @@
                         </form>
                     </div>
                     <div class="col-auto">
-                        <a href="{% url 'register' %}" class="btn btn-dark mt-3">Crear usuario</a>
+                        <a href="{% url 'crearusuario' %}" class="btn btn-dark mt-3">Crear usuario</a>
                     </div>
                 </div>
             </form>
@@ -37,6 +37,7 @@
                             <th class="bg-dark text-white">Ciudad</th>
                             <th class="bg-dark text-white">Dirección</th>
                             <th class="bg-dark text-white">Fecha de registro</th>
+                            <th class="bg-dark text-white">Es activo</th>
                             <th class="bg-dark text-white">Acción</th>
                         </tr>
                     </thead>
@@ -52,6 +53,7 @@
                                 <td>{% if usuario.ciudad %}{{ usuario.ciudad }}{% else %}Pendiente{% endif %}</td>
                                 <td>{% if usuario.direccion %}{{ usuario.direccion }}{% else %}Pendiente{% endif %}</td>
                                 <td>{{ usuario.date_joined }}</td>
+                                <td>{% if usuario.is_active %}Sí{% else %}No{% endif %}</td>
                                 <td class="text-center">
                                     <a class="btn btn-primary d-inline-block mx-1 my-1" href="{% url 'userProfile' usuario.username %}">
                                         Ver perfil
