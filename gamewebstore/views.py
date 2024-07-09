@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import logout
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.models import User
-from .models import Juego, Perfil, Cart, CartItem, Venta
+from .models import Juego, Perfil, Cart, CartItem, Venta, DetalleVenta
 from .forms import JuegoForm, UpdateJuegoForm, UserForm, PerfilForm, UpdatePerfilForm, EstadoVentaForm
 from django.contrib import messages
 from os import remove, path
@@ -179,12 +179,6 @@ def remove_from_cart(request, item_id):
     cart_item.delete()
     messages.success(request, 'El ítem fue eliminado del carrito.')
     return redirect('cart_detail')
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.utils import timezone
-from .models import Venta, DetalleVenta, Cart
 
 @login_required
 def process_payment(request):
