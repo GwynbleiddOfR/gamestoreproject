@@ -2,71 +2,94 @@
 {% load static %}
 {% block contenido %}
 
-    <title>Pedidos</title>
+<title>Pedidos</title>
 
-    {% if perms.gamewebstore.view_venta %}
-        <div class="container mt-3">
-            <h2>Pedidos</h2>
-            <a href="{% url 'adminGames' %}" class="btn btn-dark my-4 mx-1">Volver al admin</a>
+{% if perms.gamewebstore.view_venta %}
+    <div class="container mt-3">
+        <h2>Pedidos</h2>
+        <a href="{% url 'adminGames' %}" class="btn btn-dark my-4 mx-1">Volver al admin</a>
 
-            <form method="get">
-                <div class="input-group mb-3 col-lg-6 col-md-8 col-12">
-                    <input type="text" class="form-control" name="q" placeholder="Buscar venta..." aria-label="Buscar" value="{{ request.GET.q }}">
-                </div>
-            </form>
+        <form method="get">
+            <div class="input-group mb-3 col-lg-6 col-md-8 col-12">
+                <input type="text" class="form-control" name="q" placeholder="Buscar venta..." aria-label="Buscar" value="{{ request.GET.q }}">
+            </div>
+        </form>
 
-            <div class="table-responsive my-3">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="bg-dark text-white">ID pedido</th>
-                            <th class="bg-dark text-white">ID juego</th>
-                            <th class="bg-dark text-white">Nombre juego</th>
-                            <th class="bg-dark text-white">Consola</th>
-                            <th class="bg-dark text-white">Cantidad vendida</th>
-                            <th class="bg-dark text-white">Total venta</th>
-                            <th class="bg-dark text-white">Usuario</th>
-                            <th class="bg-dark text-white">Email usuario</th>
-                            <th class="bg-dark text-white">Estado</th>
-                            <th class="bg-dark text-white">Fecha venta</th>
-                            <th class="bg-dark text-white">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for venta in ventas %}
+        <div class="table-responsive my-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="bg-dark text-white">ID pedido</th>
+                        <th class="bg-dark text-white">Nombre juego</th>
+                        <th class="bg-dark text-white">Consola</th>
+                        <th class="bg-dark text-white">Cantidad vendida</th>
+                        <th class="bg-dark text-white">Total venta</th>
+                        <th class="bg-dark text-white">Usuario</th>
+                        <th class="bg-dark text-white">Email usuario</th>
+                        <th class="bg-dark text-white">Estado</th>
+                        <th class="bg-dark text-white">Fecha venta</th>
+                        <th class="bg-dark text-white">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venta in ventas %}
+                        {% for detalle in venta.detalles.all %}
                             <tr>
-                                <td>{{ venta.id }}</td>
-                                <td>{{ venta.juego.id }}</td>
-                                <td>{{ venta.juego.nomb_juego }}</td>
-                                <td>{{ venta.juego.consola }}</td>
-                                <td>{{ venta.cantidad }}</td>
-                                <td>$ {{ venta.total_venta }}</td>
-                                <td>{% if venta.usuario %}<a href="{% url 'userProfile' venta.usuario.username %}">{{venta.usuario.username}}</a>{% else %}Usuario eliminado{% endif %}</td>
-                                <td>{% if venta.usuario %}{{ venta.usuario.email }}{% else %}N/A{% endif %}</td>
-                                <td>
-                                    <form method="post" action="">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="venta_id" value="{{ venta.id }}">
-                                        <select name="estado" onchange="this.form.submit()"> 
-                                            <option value="EN PREPARACIÓN" {% if venta.estado == 'EN PREPRACIÓN' %}selected{% endif %}>EN PREPARACIÓN</option>
-                                            <option value="PREPARADO" {% if venta.estado == 'PREPARADO' %}selected{% endif %}>PREPARADO</option>
-                                            <option value="ENVIADO" {% if venta.estado == 'ENVIADO' %}selected{% endif %}>ENVIADO</option>
-                                            <option value="ENTREGADO" {% if venta.estado == 'ENTREGADO' %}selected{% endif %}>ENTREGADO</option>
-                                            <option value="CANCELADO" {% if venta.estado == 'CANCELADO' %}selected{% endif %}>CANCELADO</option>
-                                        </select>
-                                    </form>
-                                </td>
-                                <td>{{ venta.fecha }}</td>
-                                {% if venta.usuario %}
-                                <td><a href="{% url 'userProfile' venta.usuario.username %}" class="btn btn-primary">Ver perfil</a></td>
-                                {% else %}
-                                <td>N/A</td>
+                                {% if forloop.first %}
+                                    <td rowspan="{{ venta.detalles.count }}">{{ venta.id }}</td>
+                                {% endif %}
+                                <td>{{ detalle.juego.nomb_juego }}</td>
+                                <td>{{ detalle.juego.consola }}</td>
+                                <td>{{ detalle.cantidad }}</td>
+                                <td>$ {{ detalle.total_detalle }}</td>
+                                {% if forloop.first %}
+                                    <td rowspan="{{ venta.detalles.count }}">
+                                        {% if venta.usuario %}
+                                            <a href="{% url 'userProfile' venta.usuario.username %}">{{ venta.usuario.username }}</a>
+                                        {% else %}
+                                            Usuario eliminado
+                                        {% endif %}
+                                    </td>
+                                    <td rowspan="{{ venta.detalles.count }}">
+                                        {% if venta.usuario %}
+                                            {{ venta.usuario.email }}
+                                        {% else %}
+                                            N/A
+                                        {% endif %}
+                                    </td>
+                                    <td rowspan="{{ venta.detalles.count }}">
+                                        <form method="post" action="">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="venta_id" value="{{ venta.id }}">
+                                            <select name="estado" onchange="this.form.submit()"> 
+                                                <option value="EN PREPARACIÓN" {% if venta.estado == 'EN PREPARACIÓN' %}selected{% endif %}>EN PREPARACIÓN</option>
+                                                <option value="PREPARADO" {% if venta.estado == 'PREPARADO' %}selected{% endif %}>PREPARADO</option>
+                                                <option value="ENVIADO" {% if venta.estado == 'ENVIADO' %}selected{% endif %}>ENVIADO</option>
+                                                <option value="ENTREGADO" {% if venta.estado == 'ENTREGADO' %}selected{% endif %}>ENTREGADO</option>
+                                                <option value="CANCELADO" {% if venta.estado == 'CANCELADO' %}selected{% endif %}>CANCELADO</option>
+                                            </select>
+                                        </form>
+                                    </td>
+                                    <td rowspan="{{ venta.detalles.count }}">{{ venta.fecha }}</td>
+                                    <td rowspan="{{ venta.detalles.count }}">
+                                        {% if venta.usuario %}
+                                            <a href="{% url 'userProfile' venta.usuario.username %}" class="btn btn-primary">Ver perfil</a>
+                                        {% else %}
+                                            N/A
+                                        {% endif %}
+                                    </td>
                                 {% endif %}
                             </tr>
                         {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                        <tr>
+                            <td colspan="4" class="text-right font-weight-bold">Total de la venta:</td>
+                            <td colspan="6">$ {{ venta.total_venta }}</td>
+                        </tr>
+                        <tr><td colspan="10" style="background-color: black; height: 2px;"></td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-    {% endif %}
+    </div>
+{% endif %}
 {% endblock contenido %}

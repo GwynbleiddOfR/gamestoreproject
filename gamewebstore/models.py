@@ -45,14 +45,22 @@ class Cart(models.Model):
 # Ventas
 class Venta(models.Model):
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, null=True, blank=True, verbose_name="Usuario")
-    juego = models.ForeignKey(Juego, on_delete=models.CASCADE, verbose_name="Juego")
-    cantidad = models.PositiveIntegerField()
-    total_venta = models.PositiveIntegerField()
     fecha = models.DateTimeField(auto_now_add=True)
     estado = models.CharField(max_length=30, choices=ESTADO, default='EN PREPARACIÓN')
 
     def total_venta(self):
+        return sum(detalle.total_detalle() for detalle in self.detalles.all())
+
+    def __str__(self):
+        return f"Venta {self.id} - {self.usuario} - {self.fecha}"
+
+class DetalleVenta(models.Model):
+    venta = models.ForeignKey(Venta, related_name='detalles', on_delete=models.CASCADE, verbose_name="Venta")
+    juego = models.ForeignKey(Juego, on_delete=models.CASCADE, verbose_name="Juego")
+    cantidad = models.PositiveIntegerField()
+    
+    def total_detalle(self):
         return self.cantidad * self.juego.precio
 
     def __str__(self):
-        return f"Venta {self.id} - {self.juego.nomb_juego} - {self.cantidad} unidades"
+        return f"{self.juego.nomb_juego} - {self.cantidad} unidades"

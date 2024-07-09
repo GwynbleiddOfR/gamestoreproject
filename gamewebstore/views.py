@@ -35,6 +35,8 @@ def index(request):
         juegos_filtrados = juegos.filter(consola=consola)
         if juegos_filtrados.exists():
             juegos = juegos_filtrados
+        else:
+            messages.error(request, 'Lo sentimos, no tenemos juegos disponibles para la consola seleccionada en este momento.')
     
     datos = {
         "juegos": juegos
@@ -176,6 +178,12 @@ def remove_from_cart(request, item_id):
     messages.success(request, 'El ítem fue eliminado del carrito.')
     return redirect('cart_detail')
 
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.utils import timezone
+from .models import Venta, DetalleVenta, Cart
+
 @login_required
 def process_payment(request):
     cart, created = Cart.objects.get_or_create(usuario=request.user)
@@ -183,27 +191,29 @@ def process_payment(request):
         messages.error(request, 'No tienes artículos en tu carrito.')
         return redirect('cart_detail')
 
+    venta = Venta.objects.create(
+        usuario=request.user,
+        estado='EN PREPARACIÓN',
+        fecha=timezone.now()
+    )
+
     for item in cart.items.all():
         juego = item.juego
         if item.cantidad > juego.stock:
             messages.error(request, f'No hay suficiente stock para {juego.nomb_juego}.')
             return redirect('cart_detail')
         
-        Venta.objects.create(
-                usuario=request.user,
-                juego=juego,
-                cantidad=item.cantidad,
-                estado='EN PREPARACIÓN',
-                fecha=timezone.now()
-            )
+        DetalleVenta.objects.create(
+            venta=venta,
+            juego=juego,
+            cantidad=item.cantidad
+        )
         
-    for item in cart.items.all():
-        juego = item.juego
         juego.stock -= item.cantidad
         juego.save()
 
     cart.items.clear()
-    
+
     messages.success(request, 'Pago realizado con éxito. Gracias por tu compra.')
     return redirect('cart_detail')
 
@@ -357,7 +367,7 @@ def userProfile(request, username):
 @login_required
 def vistaCompras(request):
     query = request.GET.get('q')
-    ventas = Venta.objects.filter(usuario=request.user).order_by('-fecha')
+    ventas = Venta.objects.filter(usuario=request.user).order_by('fecha')
 
     if query:
         ventas_filtradas = ventas.filter(
@@ -394,7 +404,7 @@ def vistaVender(request):
 @permission_required('gamewebstore.view_venta')
 def vistaVentas(request):
     query = request.GET.get('q')
-    ventas = Venta.objects.all().order_by('-fecha')
+    ventas = Venta.objects.all().order_by('fecha')
 
     if query:
         ventas_filtradas = ventas.filter(

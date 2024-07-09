@@ -2,45 +2,60 @@
 {% load static %}
 {% block contenido %}
 
-    <title>Mis compras</title>
+<title>Mis compras</title>
 
-    <div class="container mt-3">
-        <h2>Mis compras</h2>
-        <a href="{% url 'userProfile' user.username %}" class="btn btn-dark my-4 mx-1">Volver a mi perfil</a>
-        <div class="table-responsive my-3">
+<div class="container mt-3">
+    <h2>Mis compras</h2>
+    <a href="{% url 'userProfile' user.username %}" class="btn btn-dark my-4 mx-1">Volver a mi perfil</a>
+    <div class="table-responsive my-3">
 
-            <form method="get">
-                <div class="input-group mb-3 col-lg-6 col-md-8 col-12">
-                    <input type="text" class="form-control" name="q" placeholder="Buscar compra..." aria-label="Buscar" value="{{ request.GET.q }}">
-                </div>
-            </form>
+        <form method="get">
+            <div class="input-group mb-3 col-lg-6 col-md-8 col-12">
+                <input type="text" class="form-control" name="q" placeholder="Buscar compra..." aria-label="Buscar" value="{{ request.GET.q }}">
+            </div>
+        </form>
 
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th class="bg-dark text-white">Imagen</th>
-                        <th class="bg-dark text-white">Juego</th>
-                        <th class="bg-dark text-white">Consola</th>
-                        <th class="bg-dark text-white">Precio</th>
-                        <th class="bg-dark text-white">Cantidad</th>
-                        <th class="bg-dark text-white">Estado del pedido</th>
-                        <th class="bg-dark text-white">Fecha de compra</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for venta in ventas %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="bg-dark text-white">Imagen</th>
+                    <th class="bg-dark text-white">Juego</th>
+                    <th class="bg-dark text-white">Consola</th>
+                    <th class="bg-dark text-white">Precio</th>
+                    <th class="bg-dark text-white">Cantidad</th>
+                    <th class="bg-dark text-white">Estado del pedido</th>
+                    <th class="bg-dark text-white">Fecha de compra</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for venta in ventas %}
+                    {% if not forloop.first %}
                         <tr>
-                            <td class="text-center"> <img src="{{ venta.juego.foto_juego.url }}" style="width: 65px;" alt="juego-imagen"></td>
-                            <td>{{ venta.juego.nomb_juego }}</td>
-                            <td>{{ venta.juego.consola }}</td>
-                            <td>$ {{ venta.total_venta }}</td>
-                            <td>{{ venta.cantidad }}</td>
-                            <td>{{ venta.estado }}</td>
-                            <td>{{ venta.fecha }}</td>
+                            <td colspan="7" style="background-color: black; height: 5px;"></td>
+                        </tr>
+                    {% endif %}
+                    {% for detalle in venta.detalles.all %}
+                        <tr>
+                            <td class="text-center">
+                                <img src="{{ detalle.juego.foto_juego.url }}" style="width: 65px;" alt="juego-imagen">
+                            </td>
+                            <td>{{ detalle.juego.nomb_juego }}</td>
+                            <td>{{ detalle.juego.consola }}</td>
+                            <td>$ {{ detalle.total_detalle }}</td>
+                            <td>{{ detalle.cantidad }}</td>
+                            {% if forloop.first %}
+                                <td rowspan="{{ venta.detalles.count }}">{{ venta.estado }}</td>
+                                <td rowspan="{{ venta.detalles.count }}">{{ venta.fecha }}</td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    <tr>
+                        <td colspan="4" class="text-right font-weight-bold">Total de la venta:</td>
+                        <td colspan="3">$ {{ venta.total_venta }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+</div>
 {% endblock contenido %}

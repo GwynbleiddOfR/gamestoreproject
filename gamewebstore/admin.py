@@ -6,7 +6,7 @@ class AdmJuego(admin.ModelAdmin):
     list_filter=['consola']
 
 class AdmVenta(admin.ModelAdmin):
-    list_display=['usuario', 'juego', 'cantidad', 'total_venta', 'fecha', 'estado']
+    list_display=['id', 'fecha', 'estado', 'usuario_id']
 
 # Register your models here.
 admin.site.register(Juego, AdmJuego)
