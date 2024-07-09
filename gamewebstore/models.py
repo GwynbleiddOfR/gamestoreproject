@@ -56,7 +56,7 @@ class Venta(models.Model):
 
 class DetalleVenta(models.Model):
     venta = models.ForeignKey(Venta, related_name='detalles', on_delete=models.CASCADE, verbose_name="Venta")
-    juego = models.ForeignKey(Juego, on_delete=models.CASCADE, verbose_name="Juego")
+    juego = models.ForeignKey(Juego, on_delete=models.PROTECT, verbose_name="Juego")
     cantidad = models.PositiveIntegerField()
     
     def total_detalle(self):

@@ -240,16 +240,20 @@ def modificarjuego(request, id):
 def deleteGame(request, id):
     juego=get_object_or_404(Juego, id=id)
     
-    if request.method=="POST":
-        remove(path.join(str(settings.MEDIA_ROOT).replace('/media',''))+juego.foto_juego.url)
-        juego.delete()
-        messages.warning(request,"Juego eliminado")
+    try:
+        if request.method=="POST":
+            juego.delete()
+            remove(path.join(str(settings.MEDIA_ROOT).replace('/media',''))+juego.foto_juego.url)
+            messages.warning(request,"Juego eliminado")
+            return redirect(to="adminGames")
+    except Exception:
+        messages.error(request, "No se puede eliminar este juego ya que tiene un pedido")
         return redirect(to="adminGames")
-        
+
     datos={
         "juego":juego
     }
-
+    
     return render(request,'gamewebstore/deleteGame.html', datos)
 
 @permission_required('gamewebstore.delete_user')
