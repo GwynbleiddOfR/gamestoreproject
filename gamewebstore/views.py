@@ -37,6 +37,8 @@ def index(request):
             juegos = juegos_filtrados
         else:
             messages.error(request, 'Lo sentimos, no tenemos juegos disponibles para la consola seleccionada en este momento.')
+
+    juegos = juegos.filter(stock__gt=0)
     
     datos = {
         "juegos": juegos
