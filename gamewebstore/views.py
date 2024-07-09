@@ -177,7 +177,7 @@ def update_cart_item(request, item_id):
 def remove_from_cart(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id)
     cart_item.delete()
-    messages.success(request, 'El ítem fue eliminado del carrito.')
+    messages.success(request, 'El juego fue eliminado del carrito.')
     return redirect('cart_detail')
 
 @login_required
